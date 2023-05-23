@@ -5,6 +5,7 @@ import "./style.css";
 const Log = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [errorUser, setErrorUser] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +34,6 @@ const Log = () => {
     let result = await response.json();
     console.log(result);
     if (response.status === 200) {
-      // if (result.userId === "64242194688802ba1e6ee5fd") {
       console.log("token", result.token);
       localStorage.setItem("token", result.token);
 
@@ -50,21 +50,24 @@ const Log = () => {
   }
 
   return (
-    <form>
+    <form className="form">
+ 
       <div className="input-wrapper">
-        <label htmlFor="username">Adresse e-mail</label>
+        {/* <label htmlFor="username">Adresse e-mail</label> */}
         <input
           id="username"
           type="text"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="input-wrapper">
-        <label htmlFor="password">Mot de passe</label>
+        {/* <label htmlFor="password">Mot de passe</label> */}
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="password"
           type="password"
           id="password"
         />
@@ -87,7 +90,7 @@ const Log = () => {
         ""
       )}
       <button type="submit" className="sign-in-button" onClick={log}>
-        connexion
+        Log in
       </button>
     </form>
   );

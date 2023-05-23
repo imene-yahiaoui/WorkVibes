@@ -1,0 +1,24 @@
+.Login {
+  background-color: aqua;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.Login_continer {
+  background-color: rgb(122, 9, 35);
+  width: 70%;
+  height: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.Login_continer img {
+  width: 50%;
+  height: 100%;
+}
+.Login_auth {
+  margin: 0 auto;
+}
