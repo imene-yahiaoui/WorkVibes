@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/header";
+import Footer from "./components/footer";
+//  import Login from "./pages/login";
+import RoutesPath from "./containers/RoutesPath/index.jsx";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+//  const user= localStorage.getItem("userId");
+//  !user? console.log("il ya pas"): console.log("il est la ")
+  return(
+    // !user? 
+//     <div className="App">
+  
+//   <Login />
+  
+//   </div>
+ 
+ 
+// :
+
+ 
+  <div className="App">
+  <Header />
+  <RoutesPath />
+  <Footer />
+</div>
+  )
+  }
+ 
+
 
 export default App;
