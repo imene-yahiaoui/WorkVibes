@@ -70,12 +70,12 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      if ( .userId != req.auth.userId) {
+      if (post.userId != req.auth.userId) {
         res.status(401).json({ message: "Not authorized" });
       } else {
-        const filename = thing.imageUrl.split("/images/")[1];
+        const filename = post.imageUrl.split("/images/")[1];
         fs.unlink(`images/${filename}`, () => {
-          Thing.deleteOne({ _id: req.params.id })
+          Post.deleteOne({ _id: req.params.id })
             .then(() => {
               res.status(200).json({ message: "Objet supprimé !" });
             })
@@ -88,10 +88,10 @@ exports.deletePost = (req, res, next) => {
     });
 };
 
-exports.getAllStuff = (req, res, next) => {
-  Thing.find()
-    .then((things) => {
-      res.status(200).json(things);
+exports.getAllPosts = (req, res, next) => {
+  Post.find()
+    .then((posts) => {
+      res.status(200).json(posts);
     })
     .catch((error) => {
       res.status(400).json({
