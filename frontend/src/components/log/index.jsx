@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../helpers/features/userSlice";
 
 const Log = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +11,7 @@ const Log = () => {
   const [errorUser, setErrorUser] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   async function log(e) {
     e.preventDefault();
     //empty
@@ -36,6 +38,11 @@ const Log = () => {
     if (response.status === 200) {
       console.log("token", result.token);
       localStorage.setItem("token", result.token);
+      dispatch(
+        login({
+          user: item,
+        })
+      );
 
       navigate("/");
     } else {
@@ -53,7 +60,6 @@ const Log = () => {
     <form className="form">
       <div className="input-wrapper">
         <input
-         
           type="Email"
           placeholder="Email"
           value={email}

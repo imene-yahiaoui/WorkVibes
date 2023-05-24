@@ -3,10 +3,13 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./style.css";
 
+import { useDispatch } from "react-redux";
+import { login } from "../../helpers/features/userSlice";
+
 const Signup = () => {
   const [errorEmail, setErrorEmail] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const validateForm = (values) => {
     const errors = {};
 
@@ -42,10 +45,10 @@ const Signup = () => {
       firstname: values.firstname,
       lastname: values.lastname,
     };
-    let login ={
+    let loginItem = {
       email: values.email,
       password: values.password,
-    }
+    };
 
     let response = await fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
@@ -59,24 +62,28 @@ const Signup = () => {
     let result = await response.json();
     console.log(result);
     if (response.status === 201) {
-//le login direct apres le signup
-       let response = await fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(login),
-    });
-    console.log(response);
-    let result = await response.json();
-    console.log(result);
-    if (response.status === 200) {
-      navigate("/");
-      console.log("token", result.token);
-      localStorage.setItem("token", result.token);
-    }
-
+      //le login direct apres le signup
+      let response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginItem),
+      });
+      console.log(response);
+      let result = await response.json();
+      console.log(result);
+      if (response.status === 200) {
+        dispatch(
+          login({
+            user: item,
+          })
+        );
+        console.log("token", result.token);
+        localStorage.setItem("token", result.token);
+        navigate("/");
+      }
     } else if (response.status === 400) {
       setErrorEmail(true);
       function deleteError() {
