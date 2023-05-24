@@ -53,7 +53,7 @@ const Log = () => {
     <form className="form">
       <div className="input-wrapper">
         <input
-          // id="username"
+         
           type="Email"
           placeholder="Email"
           value={email}
