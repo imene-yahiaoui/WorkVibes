@@ -1,16 +1,17 @@
 .input-names {
   display: flex;
   flex-direction: row;
-  text-align: left;
+
   margin-bottom: 40px;
   grid-gap: 17px;
 }
 
 .input-name input {
   padding: 5px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   background: rgb(240, 238, 235);
   border-radius: 5px;
+  width:80%;
 }
 
 .input-name label {

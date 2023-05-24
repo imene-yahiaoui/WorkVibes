@@ -5,29 +5,24 @@ import Footer from "./components/footer";
 import RoutesPath from "./containers/RoutesPath/index.jsx";
 
 function App() {
+  //  const user= localStorage.getItem("userId");
+  //  !user? console.log("il ya pas"): console.log("il est la ")
+  return (
+    // !user?
+    //     <div className="App">
 
-//  const user= localStorage.getItem("userId");
-//  !user? console.log("il ya pas"): console.log("il est la ")
-  return(
-    // !user? 
-//     <div className="App">
-  
-//   <Login />
-  
-//   </div>
- 
- 
-// :
+    //   <Login />
 
- 
-  <div className="App">
-  <Header />
-  <RoutesPath />
-  <Footer />
-</div>
-  )
-  }
- 
+    //   </div>
 
+    // :
+
+    <div className="App">
+      <Header />
+      <RoutesPath />
+      <Footer />
+    </div>
+  );
+}
 
 export default App;
