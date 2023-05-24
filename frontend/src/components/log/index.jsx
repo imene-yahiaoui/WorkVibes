@@ -51,19 +51,18 @@ const Log = () => {
 
   return (
     <form className="form">
- 
       <div className="input-wrapper">
-        {/* <label htmlFor="username">Adresse e-mail</label> */}
         <input
-          id="username"
-          type="text"
+          // id="username"
+          type="Email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          required
         />
       </div>
       <div className="input-wrapper">
-        {/* <label htmlFor="password">Mot de passe</label> */}
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -74,18 +73,17 @@ const Log = () => {
       </div>
       <div className="input-remember">
         <input type="checkbox" id="remember-me" />
-        <label htmlFor="remember-me">Se souvenir de moi</label>
+        <label htmlFor="remember-me">Remember me</label>
       </div>
       {error ? (
-        <p className="error">
-          Erreur : l'adresse e-mail et le mot de passe ne peuvent pas être nuls
-          ou vides
+        <p className="error_login">
+          Error: Email address and password cannot be null or empty
         </p>
       ) : (
         ""
       )}
       {!error && errorUser ? (
-        <p className="error">Erreur dans l'adresse e-mail ou le mot de passe</p>
+        <p className="error_login">Error: Invalid email address or password</p>
       ) : (
         ""
       )}

@@ -13,23 +13,20 @@ function Login() {
       <figure className="Login_continer">
         <img src={Company} alt="company" />
         {login ? (
-
-           
           <figcaption className="Login_auth">
-                 <h2> Log in </h2>
+            <h2> Log in </h2>
             <Log />
-            <div>
+            <div className="login_signup">
               <p>No account yet? </p>
               <button onClick={toggleLogin}>Signup</button>
             </div>
           </figcaption>
         ) : (
-         
           <figcaption className="Login_auth">
-                 <h2> Signup </h2>
+            <h2> Sign up </h2>
             <Signup />
-            <div>
-              <p>No account yet? </p>
+            <div className="login_signup">
+              <p>Already have an account? </p>
               <button onClick={toggleLogin}>Log in</button>
             </div>
           </figcaption>

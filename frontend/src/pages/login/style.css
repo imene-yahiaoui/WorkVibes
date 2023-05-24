@@ -7,20 +7,41 @@
 }
 
 .Login_continer {
-  background-color: rgb(255, 149, 0);
+  background-color: rgb(240, 238, 235);
   width: 70%;
-  height:500px;
+  height: 500px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
- 
 }
 
-.Login_continer img{
-    width:50%;
-    height:100%;
-
+.Login_continer img {
+  width: 50%;
+  height: 100%;
 }
-.Login_auth{
-    width:40%;
+.Login_auth {
+  margin: 0 auto;
+}
+.Login_auth h2 {
+  color: brown;
+  font-size: 30px;
+}
+.login_signup {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.login_signup button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: brown;
+  border-bottom: solid 1px brown;
+  font-size: 19px;
+}
+.login_signup p {
+  font-size: 19px;
 }

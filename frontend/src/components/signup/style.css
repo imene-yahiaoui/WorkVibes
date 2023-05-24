@@ -1,24 +1,18 @@
-.Login {
-  background-color: aqua;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.Login_continer {
-  background-color: rgb(122, 9, 35);
-  width: 70%;
-  height: 500px;
-  margin: 0 auto;
+.input-names {
   display: flex;
   flex-direction: row;
+  text-align: left;
+  margin-bottom: 40px;
+  grid-gap: 17px;
 }
 
-.Login_continer img {
-  width: 50%;
-  height: 100%;
+.input-name input {
+  padding: 5px;
+  font-size: 1.2rem;
+  background: rgb(240, 238, 235);
+  border-radius: 5px;
 }
-.Login_auth {
-  margin: 0 auto;
+
+.input-name label {
+  font-weight: bold;
 }

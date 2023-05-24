@@ -27,7 +27,8 @@
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
-  background: #bc8f8f4f;
+  background:  rgb(240, 238, 235);
+  border-radius: 5px;
 }
 
 .sign-in-button {
@@ -37,11 +38,12 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: rgb(255, 0, 238);
-  background-color: rgb(12, 12, 12);
+  border-color:   rgb(240, 238, 235);
+  background-color: brown;
   color: #fff;
+  border-radius: 5px;
 }
-.error {
+.error_login {
   font-size: 1.2rem;
   color: red;
 }
