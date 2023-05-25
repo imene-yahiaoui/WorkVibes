@@ -2,20 +2,21 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/home";
 import NotFound from "../../pages/notFound";
 import Login from "../../pages/login";
-// import Project from "../../pages/account";
 import ProtectrRoute from "../../helpers/protectrRoute";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../helpers/features/userSlice";
 import Protect from "../../helpers/protect";
+import UserList from "../../pages/userList";
+import Account from "../../pages/account";
 const RoutesPath = () => {
   const user = useSelector(selectUser);
- 
 
   return (
     <div>
       <Routes>
         <Route path="/*" element={<NotFound />} />
-
+        <Route path="/UserList" element={<UserList />} />
+        <Route path="/Account" element={<Account />} />
         <Route
           path="/login"
           element={

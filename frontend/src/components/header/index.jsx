@@ -19,12 +19,12 @@ function Header() {
           </Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/UserList">
             <i className="fa-sharp fa-solid fa-user-group"></i>
           </Link>
         </li>
         <li>
-          <Link to="/" >
+          <Link to="/Account" >
             <i className="fa-solid fa-user"></i>
           </Link>
         </li>
