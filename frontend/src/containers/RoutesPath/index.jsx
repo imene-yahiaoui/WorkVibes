@@ -3,18 +3,37 @@ import Home from "../../pages/home";
 import NotFound from "../../pages/notFound";
 import Login from "../../pages/login";
 // import Project from "../../pages/account";
-// import ProtectrdRoute from "../../helpers/protectrdRoute";
+import ProtectrRoute from "../../helpers/protectrRoute";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../helpers/features/userSlice";
+import Protect from "../../helpers/protect";
 const RoutesPath = () => {
+  const user = useSelector(selectUser);
   //  const user= localStorage.getItem("token");
 
   return (
     <div>
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        {/* <Route path="/Project/:id" element={<Project />} /> */}
         <Route path="/*" element={<NotFound />} />
-        <Route path="/Login" element={<Login />} />
-        {/* <ProtectrdRoute  user={user} > <Home/></ProtectrdRoute> */}
+
+        <Route
+          path="/login"
+          element={
+            <Protect user={user}>
+              {" "}
+              <Login />
+            </Protect>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectrRoute user={user}>
+              {" "}
+              <Home />{" "}
+            </ProtectrRoute>
+          }
+        />
       </Routes>
     </div>
   );
