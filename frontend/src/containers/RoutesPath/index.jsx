@@ -9,7 +9,7 @@ import { selectUser } from "../../helpers/features/userSlice";
 import Protect from "../../helpers/protect";
 const RoutesPath = () => {
   const user = useSelector(selectUser);
-  //  const user= localStorage.getItem("token");
+ 
 
   return (
     <div>

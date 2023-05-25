@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: rgb(212, 37, 37);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.icon{
+        display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 19px;
+
+}
+.nav_icon{
+    display: flex;
+    flex-direction: row;
+}
+.nav-elements{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    list-style: none;
+    column-gap: 120px;
+}
+ 

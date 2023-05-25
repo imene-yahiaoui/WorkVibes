@@ -9,7 +9,6 @@
 .Login_continer {
   background-color: rgb(240, 238, 235);
   width: 70%;
-  height: 700px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -17,7 +16,6 @@
 
 .Login_continer img {
   width: 50%;
-  height: 100%;
   object-fit: cover;
 }
 .Login_auth {
