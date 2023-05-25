@@ -1,11 +1,9 @@
-.main-nav button.router-link-exact-active {
-  color: #42b983;
-}
+
 
 .main-nav-item {
   /* font-weight: bold; */
-  color: #2c3e50;
-  font-size: 1rem;
+  color: white;
+     font-size: 19px;
   border: none;
   text-decoration: none;
   margin-right: 0.5rem;
@@ -15,37 +13,15 @@
   font-weight: 600;
 }
 
-.main-nav-item:hover {
-  text-decoration: underline;
-}
-.fa-user-circle {
-  margin-right: 5px;
-}
-.fa-user-circle::before {
-  content: "\f2bd";
+.main-nav-item :hover{
+   color: #3C84AB;
 }
 
-.main-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
-}
+
 
 .logout {
   display: flex;
   flex-direction: row;
   grid-gap: 13px;
-  align-items: center;
-}
-.name {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
-}
-.nameUser {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
 }

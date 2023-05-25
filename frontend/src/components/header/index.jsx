@@ -24,7 +24,7 @@ function Header() {
           </Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/" >
             <i className="fa-solid fa-user"></i>
           </Link>
         </li>
