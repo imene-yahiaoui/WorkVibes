@@ -71,25 +71,32 @@ const Signup = () => {
         },
         body: JSON.stringify(loginItem),
       });
-      console.log(response);
+
       let result = await response.json();
-      console.log(result);
+
       if (response.status === 200) {
-        dispatch(
-          login({
-            user: item,
-          })
-        );
-        console.log("token", result.token);
         localStorage.setItem("token", result.token);
+
+        const id = result.userId;
+        let getinfos = await fetch(`http://localhost:3000/api/auth/${id}`);
+
+        let resultGetInfos = await getinfos.json();
+
+        if (response.status === 200) {
+          dispatch(
+            login({
+              user: resultGetInfos,
+            })
+          );
+        }
         navigate("/");
+      } else if (response.status === 400) {
+        setErrorEmail(true);
+        function deleteError() {
+          setErrorEmail(false);
+        }
+        setTimeout(deleteError, 4000);
       }
-    } else if (response.status === 400) {
-      setErrorEmail(true);
-      function deleteError() {
-        setErrorEmail(false);
-      }
-      setTimeout(deleteError, 4000);
     }
   };
 
