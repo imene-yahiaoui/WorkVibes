@@ -185,7 +185,7 @@ exports.modifyUser = (req, res, next) => {
         .then(() => res.status(200).json({ message: "User updated!" }))
         .catch((error) => res.status(500).json({ error }));
     }
-  });
+  })
   .catch((error) => {
     res.status(400).json({ error });
   });
