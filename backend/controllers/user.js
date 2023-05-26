@@ -90,23 +90,37 @@ exports.getUserById = (req, res, next) => {
       res.status(500).json({ error });
     });
 };
-//delet user
 
 exports.deleteUser = (req, res, next) => {
   User.findOne({ _id: req.params.id })
     .then((user) => {
-      console.log(String(user._id));
-      console.log(req.auth.userId);
       if (String(user._id) !== req.auth.userId) {
         res.status(401).json({ message: "Not authorized" });
       } else {
-        // const filename = user.imageUrl.split("/images/")[1];
-        // fs.unlink(`images/${filename}`, () => {
-        user.deleteOne({ _id: req.params.id }).then(() => {
-          res.status(200).json({ message: "Objet supprimé !" });
-        });
-        //     .catch((error) => res.status(401).json({ error }));
-        // });
+        //si il ya une image
+        if (user.imageUrl) {
+          const filename = user.imageUrl.split("/images/")[1];
+          fs.unlink(`images/${filename}`, (error) => {
+            if (error) {
+              res.status(500).json({ error });
+              //si ya pas
+            } else {
+              user
+                .deleteOne({ _id: req.params.id })
+                .then(() => {
+                  res.status(200).json({ message: "User deleted!" });
+                })
+                .catch((error) => res.status(500).json({ error }));
+            }
+          });
+        } else {
+          user
+            .deleteOne({ _id: req.params.id })
+            .then(() => {
+              res.status(200).json({ message: "User deleted!" });
+            })
+            .catch((error) => res.status(500).json({ error }));
+        }
       }
     })
     .catch((error) => {
@@ -114,33 +128,65 @@ exports.deleteUser = (req, res, next) => {
     });
 };
 
-//edit user
+// //edit user
+// exports.modifyUser = (req, res, next) => {
+//   const userObject = req.file
+//     ? {
+//         ...JSON.parse(req.user),
+//         imageUser: `${req.protocol}://${req.get("host")}/images/${
+//           req.file.filename
+//         }`,
+//       }
+//     : { ...req.user };
+
+//   delete userObject._userId;
+//   User.findOne({ _id: req.params.id })
+
+//     .then((user) => {
+//       console.log(user)
+//       if (String(user._id) !== req.auth.userId) {
+//         res.status(401).json({ message: "Not authorized" });
+//       } else {
+//         user
+//           .updateOne(
+//             { _id: req.params.id },
+//             { ...userObject, _id: req.params.id }
+//           )
+//           .then(() => res.status(200).json({ message: "Objet modifié!" }))
+//           .catch((error) => res.status(401).json({ error }));
+//       }
+//     })
+//     .catch((error) => {
+//       res.status(400).json({ error });
+//     });
+// };
+
 exports.modifyUser = (req, res, next) => {
   const userObject = req.file
     ? {
         ...JSON.parse(req.body.user),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
+        imageUser: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
 
   delete userObject._userId;
-  User.findOne({ _id: req.params.id })
-    .then((user) => {
-      if (user.userId != req.auth.userId) {
-        res.status(401).json({ message: "Not authorized" });
-      } else {
-        user
-          .updateOne(
-            { _id: req.params.id },
-            { ...userObject, _id: req.params.id }
-          )
-          .then(() => res.status(200).json({ message: "Objet modifié!" }))
-          .catch((error) => res.status(401).json({ error }));
-      }
-    })
-    .catch((error) => {
-      res.status(400).json({ error });
-    });
+  User.findOne({ _id: req.params.id }).then((user) => {
+    console.log(user);
+    if (String(user._id) !== req.auth.userId) {
+      res.status(401).json({ message: "Not authorized" });
+    } else {
+      User.updateOne(
+        { _id: req.params.id },
+        { ...userObject, _id: req.params.id }
+      )
+
+        .then(() => res.status(200).json({ message: "User updated!" }))
+        .catch((error) => res.status(500).json({ error }));
+    }
+  });
+  .catch((error) => {
+    res.status(400).json({ error });
+  });
 };
