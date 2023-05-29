@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import ProfileImage from "../../containers/profileImage";
 import { useDispatch } from "react-redux";
+import DeletUser from "../../containers/deletUser";
 function Account() {
   const dispatch = useDispatch();
 
@@ -72,8 +73,12 @@ function Account() {
 
   return (
     <div className="account">
-      <form method="post" encType="multipart/form-data" className="container">
+      <div className="container">
+      <form method="post" encType="multipart/form-data" className="account_form"> 
+      
         <ProfileImage />
+        <div>
+        <div className="account_info">
         <label htmlFor="FirstName"> First Name </label>
         <input
           id="FirstName"
@@ -81,7 +86,8 @@ function Account() {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-
+</div>
+<div className="account_info">
         <label htmlFor="LasttName">Last Name </label>
         <input
           id="LasttName"
@@ -89,7 +95,8 @@ function Account() {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-
+</div>
+<div className="account_info">
         <label htmlFor="job">Job </label>
         <input
           id="job"
@@ -97,7 +104,8 @@ function Account() {
           value={job}
           onChange={(e) => setJob(e.target.value)}
         />
-
+</div>
+<div className="account_info">
         <label htmlFor="bio">Bio </label>
         <input
           id="bio"
@@ -105,11 +113,16 @@ function Account() {
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
+</div>
 
         <button type="submit" className="sign-in-button" onClick={updateUser}>
           modifier
         </button>
+        </div>
       </form>
+
+      <DeletUser/>
+      </div>
     </div>
   );
 }

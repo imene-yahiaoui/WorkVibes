@@ -40,15 +40,11 @@ function ProfileImage() {
           if (requete.ok) {
             const response = await requete.json();
 
-            dispatch(
-              login({
-                imageUrl: response,
-              })
-            );
+         
 
             dispatch(
               login({
-                imageUrl: response,
+                user: response,
               })
             );
             console.log(response);
