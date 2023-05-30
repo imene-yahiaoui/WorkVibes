@@ -1,6 +1,10 @@
 import "./style.css";
 import { Link } from "react-router-dom";
 import Logoff from "../../components/logoff";
+import { HiUsers } from "react-icons/hi";
+import { HiOutlineHome } from "react-icons/hi";
+import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineGlobeAlt } from "react-icons/hi";
 function Header() {
   console.log("herder il est la ");
 
@@ -8,24 +12,24 @@ function Header() {
     <div className="header">
       <ul className="nav_icon">
         <li className="icon">
-          <i className="fa-sharp fa-solid fa-globe"></i>
+          <HiOutlineGlobeAlt />
           <h1> Groupmania </h1>
         </li>
       </ul>
       <ul className="nav-elements">
         <li>
           <Link to="/">
-            <i className="fa-solid fa-house-chimney"></i>
+            <HiOutlineHome />
           </Link>
         </li>
         <li>
           <Link to="/UserList">
-            <i className="fa-sharp fa-solid fa-user-group"></i>
+            <HiUsers />
           </Link>
         </li>
         <li>
-          <Link to="/Account" >
-            <i className="fa-solid fa-user"></i>
+          <Link to="/Account">
+            <HiOutlineUser />
           </Link>
         </li>
         <li>

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../helpers/features/userSlice.js";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineLogout } from "react-icons/hi";
 
 import "./style.css";
 const Logoff = () => {
@@ -15,7 +16,7 @@ const Logoff = () => {
   return (
     <div className="logout">
       <button onClick={Singout} className="main-nav-item">
-        <i className="fa fa-sign-out"></i>
+        <HiOutlineLogout />
       </button>
     </div>
   );

@@ -9,7 +9,6 @@ function Account() {
   const dispatch = useDispatch();
 
   const infos = useSelector(login);
-  console.log(infos);
 
   const email = infos?.payload.user?.user?.user.email;
   const password = infos?.payload.user?.user?.user.password;
@@ -48,6 +47,7 @@ function Account() {
 
     if (result.status === 200) {
       alert("tout pas bien");
+
       const fetchData = async () => {
         try {
           const requete = await fetch(`http://localhost:3000/api/auth/${id}`, {
@@ -61,7 +61,6 @@ function Account() {
                 user: response,
               })
             );
-            console.log("ressssssssssponse", response);
           }
         } catch (e) {
           console.log(e, "error");
@@ -74,54 +73,61 @@ function Account() {
   return (
     <div className="account">
       <div className="container">
-      <form method="post" encType="multipart/form-data" className="account_form"> 
-      
-        <ProfileImage />
-        <div>
-        <div className="account_info">
-        <label htmlFor="FirstName"> First Name </label>
-        <input
-          id="FirstName"
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-</div>
-<div className="account_info">
-        <label htmlFor="LasttName">Last Name </label>
-        <input
-          id="LasttName"
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-</div>
-<div className="account_info">
-        <label htmlFor="job">Job </label>
-        <input
-          id="job"
-          type="text"
-          value={job}
-          onChange={(e) => setJob(e.target.value)}
-        />
-</div>
-<div className="account_info">
-        <label htmlFor="bio">Bio </label>
-        <input
-          id="bio"
-          type="text"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        />
-</div>
+        <form
+          method="post"
+          encType="multipart/form-data"
+          className="account_form"
+        >
+          <ProfileImage />
+          <div>
+            <div className="account_info">
+              <label htmlFor="FirstName"> First Name </label>
+              <input
+                id="FirstName"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="account_info">
+              <label htmlFor="LasttName">Last Name </label>
+              <input
+                id="LasttName"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div className="account_info">
+              <label htmlFor="job">Job </label>
+              <input
+                id="job"
+                type="text"
+                value={job}
+                onChange={(e) => setJob(e.target.value)}
+              />
+            </div>
+            <div className="account_info">
+              <label htmlFor="bio">Bio </label>
+              <input
+                id="bio"
+                type="text"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+              />
+            </div>
 
-        <button type="submit" className="sign-in-button" onClick={updateUser}>
-          modifier
-        </button>
-        </div>
-      </form>
+            <button
+              type="submit"
+              className="sign-in-button"
+              onClick={updateUser}
+            >
+              modifier
+            </button>
+          </div>
+        </form>
 
-      <DeletUser/>
+        <DeletUser />
       </div>
     </div>
   );

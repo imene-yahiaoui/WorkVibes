@@ -1,26 +1,44 @@
 import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 function ProfileImage() {
   const dispatch = useDispatch();
   const infos = useSelector(login);
-  console.log(infos);
+
   const id = infos?.payload.user?.user?.user._id;
-  console.log("test", id);
-  let pic = infos?.payload.user?.user?.user.imageUrl;
-  console.log("test", pic);
-  let coverValue = pic === undefined ? pic : "../images/user.png";
+  const email = infos?.payload.user?.user?.user.email;
 
-  const [cover, setCover] = useState(coverValue);
+  const password = infos?.payload.user?.user?.user.password;
+  const firstName = infos?.payload.user?.user?.user.firstname;
+  const lastName = infos?.payload.user?.user?.user.lastname;
+  const job = infos?.payload.user?.user?.user.job;
+  const bio = infos?.payload.user?.user?.user.bio;
 
-  const handleFileInputChange = async (e) => {
-    setCover(e.target.files[0]);
+  const picture = infos?.payload.user?.user?.user.imageUrl;
+
+  const cover = "../images/user.png";
+
+  const [imageUrl, setImageUrl] = useState(
+    picture === undefined ? cover : picture
+  );
+
+  const handleFile = async (e) => {
+    e.preventDefault();
+
+    const file = e.target.files[0];
+    setImageUrl(URL.createObjectURL(file));
 
     const formData = new FormData();
-    formData.append("imageUrl", cover);
+    formData.append("imageUrl", file);
+    formData.append("firstname", firstName);
+    formData.append("lastname", lastName);
+    formData.append("job", job);
+    formData.append("bio", bio);
+    formData.append("password", password);
+    formData.append("email", email);
+
     let token = localStorage.getItem("token");
 
     let result = await fetch(`http://localhost:3000/api/auth/${id}`, {
@@ -32,22 +50,22 @@ function ProfileImage() {
     });
 
     if (result.status === 200) {
+      alert("Image updated successfully.");
+
       const fetchData = async () => {
         try {
           const requete = await fetch(`http://localhost:3000/api/auth/${id}`, {
             method: "GET",
           });
-          if (requete.ok) {
+          if (requete.status === 200) {
+            alert("fetch get est passer ");
             const response = await requete.json();
-
-         
 
             dispatch(
               login({
                 user: response,
               })
             );
-            console.log(response);
           }
         } catch (e) {
           console.log(e, "error");
@@ -59,15 +77,15 @@ function ProfileImage() {
 
   return (
     <div>
-      <img className="photoProfile" src={cover} alt="profile" />
+      <img className="photoProfile" alt="profile" src={imageUrl} />
+
       <div className="input-wrapper">
-        <label htmlFor="cover">Change your image</label>
+        <label htmlFor="imageUrl">Change your image</label>
         <input
           type="file"
           accept="image/*"
-          name="cover"
-          // value={coverValue}
-          onChange={handleFileInputChange}
+          name="imageUrl"
+          onChange={handleFile}
         />
       </div>
     </div>
