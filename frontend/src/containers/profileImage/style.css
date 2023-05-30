@@ -1,7 +1,35 @@
 .photoProfile {
-  width: 234px;
+  width: 220px;
   height: 221px;
   object-fit: contain;
-  border: 1px solid blue;
+  border: 1px solid #FDCEDF;
   border-radius: 124px;
+}
+
+.Profile_input {
+  position: relative;
+}
+.input {
+  position: relative;
+  opacity: 0;
+  height: 74px;
+  width: 47px;
+  position: absolute;
+  top: 31px;
+  left: 27px;
+  cursor: pointer;
+}
+.updatePicture {
+  position: relative;
+  width: 109px;
+  height: 48px;
+
+  margin: 0 auto;
+}
+.icon-container {
+  font-size: 50px;
+  position: absolute;
+  top: 0;
+  left: 27px;
+  cursor: pointer;
 }

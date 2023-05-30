@@ -2,6 +2,7 @@ import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { FcGallery } from "react-icons/fc";
 
 function ProfileImage() {
   const dispatch = useDispatch();
@@ -76,17 +77,24 @@ function ProfileImage() {
   };
 
   return (
-    <div>
+    <div className="Profile">
       <img className="photoProfile" alt="profile" src={imageUrl} />
 
-      <div className="input-wrapper">
+      <div className="Profile_input" >
         <label htmlFor="imageUrl">Change your image</label>
+        <div className="updatePicture">
+        <div className="icon-container">
+          <FcGallery/>
+          </div>
         <input
+        className="input"
           type="file"
           accept="image/*"
           name="imageUrl"
           onChange={handleFile}
         />
+        
+        </div>
       </div>
     </div>
   );
