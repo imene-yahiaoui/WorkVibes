@@ -33,8 +33,8 @@ function UserList() {
       user.firstname.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
       user.lastname.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
-  
 
+  const cover = "../images/user.png";
   return (
     <div className="container_userList">
       <input
@@ -48,7 +48,7 @@ function UserList() {
         {filteredUsers.map((user) => (
           <NavLink to={`/Profile/${user._id}`} key={user._id}>
             <User
-              imageUrl={user.imageUrl}
+              imageUrl={user.imageUrl ? user.imageUrl : cover}
               firstName={user.firstname}
               lastName={user.lastname}
               job={user.job}

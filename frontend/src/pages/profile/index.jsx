@@ -15,14 +15,19 @@ function Profile() {
     if (requete.status === 200) {
       const response = await requete.json();
       setUser(response);
+      console.log(response);
     }
   };
   fetchProjects();
+  const cover = "../images/user.png";
   return (
     <div className="profile">
       <div className="profile_continer">
-        <img className="profileUser" alt="profile" src={user.imageUrl} />
-
+        {user.imageUrl ? (
+          <img className="profileUser" alt="profile" src={user.imageUrl} />
+        ) : (
+          <img className="profileUser" alt="profile" src={cover} />
+        )}
         <div className="profileContainerUser">
           <div className="profileUser_name">
             <b>{user.firstname}</b>
