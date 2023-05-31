@@ -35,4 +35,5 @@ a{
     display: flex;
     flex-direction:row;
     column-gap: 21px;
+    color: #3c84ab;
 }

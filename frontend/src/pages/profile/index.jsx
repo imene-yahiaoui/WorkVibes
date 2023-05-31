@@ -25,8 +25,8 @@ function Profile() {
 
         <div className="profileContainerUser">
           <div className="profileUser_name">
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
+            <b>{user.firstname}</b>
+            <b>{user.lastname}</b>
           </div>
           <div className="account_info">
             {user.job === "undefined" ? "" : <p>{user.job}</p>}

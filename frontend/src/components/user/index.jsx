@@ -7,8 +7,8 @@ function User({ imageUrl, firstName, lastName, job }) {
 
       <div className="containerUser">
         <div className="user_name">
-          <p>{firstName}</p>
-          <p>{lastName}</p>
+          <b>{firstName}</b>
+          <b>{lastName}</b>
         </div>
         <div className="account_info">
           <p>{job}</p>
