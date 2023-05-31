@@ -51,15 +51,12 @@ function ProfileImage() {
     });
 
     if (result.status === 200) {
-      alert("Image updated successfully.");
-
       const fetchData = async () => {
         try {
           const requete = await fetch(`http://localhost:3000/api/auth/${id}`, {
             method: "GET",
           });
           if (requete.status === 200) {
-            alert("fetch get est passer ");
             const response = await requete.json();
 
             dispatch(
@@ -80,20 +77,19 @@ function ProfileImage() {
     <div className="Profile">
       <img className="photoProfile" alt="profile" src={imageUrl} />
 
-      <div className="Profile_input" >
+      <div className="Profile_input">
         <label htmlFor="imageUrl">Change your image</label>
         <div className="updatePicture">
-        <div className="icon-container">
-          <FcGallery/>
+          <div className="icon-container">
+            <FcGallery />
           </div>
-        <input
-        className="input"
-          type="file"
-          accept="image/*"
-          name="imageUrl"
-          onChange={handleFile}
-        />
-        
+          <input
+            className="input"
+            type="file"
+            accept="image/*"
+            name="imageUrl"
+            onChange={handleFile}
+          />
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@
   align-items: center;
   column-gap: 19px;
   color:  #3C84AB;
+  font-size: 30px;
 }
 .nav_icon {
   display: flex;
@@ -25,14 +26,11 @@
   list-style: none;
   column-gap: 120px;
   color:  white;
+  font-size: 30px;
 }
-.fa-user{
-    border-radius: 50px ;
-    border:1px solid  white; 
-    padding: 10px;
-}
-.fa-user:hover{
-    border:1px solid  #3C84AB; 
+
+.nav-elements :hover {
+  color:#3C84AB;
 }
 a {
   text-decoration: none;

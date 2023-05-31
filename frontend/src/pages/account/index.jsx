@@ -46,7 +46,7 @@ function Account() {
     });
 
     if (result.status === 200) {
-      alert("tout pas bien");
+      alert("The changes have been successfully saved");
 
       const fetchData = async () => {
         try {
@@ -72,7 +72,7 @@ function Account() {
 
   return (
     <div className="account">
-      <div className="container">
+      <div className="container_account">
         <form
           method="post"
           encType="multipart/form-data"
