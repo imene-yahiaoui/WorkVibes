@@ -18,7 +18,7 @@ const RoutesPath = () => {
         <Route path="/*" element={<NotFound />} />
         <Route path="/UserList" element={<UserList />} />
         <Route path="/Account" element={<Account />} />
-        <Route path="/Profile/:id" element={<Profile />} />
+        <Route path="/Profile/:_id" element={<Profile />} />
         <Route
           path="/login"
           element={

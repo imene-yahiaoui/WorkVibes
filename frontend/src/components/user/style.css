@@ -18,7 +18,7 @@ a:hover{
 .photoUser {
     width: 70px;
     height:70px;
-    object-fit: contain;
+    object-fit: cover;
     border: 1px solid #FDCEDF;
     border-radius: 124px;
   }

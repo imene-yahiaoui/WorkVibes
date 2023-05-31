@@ -46,7 +46,7 @@ function UserList() {
 
       <div className="userList">
         {filteredUsers.map((user) => (
-          <NavLink to={`/Profile/${user.id}`} key={user._id}>
+          <NavLink to={`/Profile/${user._id}`} key={user._id}>
             <User
               imageUrl={user.imageUrl}
               firstName={user.firstname}
