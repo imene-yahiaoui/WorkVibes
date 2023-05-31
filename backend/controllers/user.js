@@ -128,38 +128,6 @@ exports.deleteUser = (req, res, next) => {
     });
 };
 
-//edit user
-
-// exports.modifyUser = (req, res, next) => {
-//   const userObject = req.file
-//     ? {
-//         ...JSON.parse(req.body.user),
-//         imageUser: `${req.protocol}://${req.get("host")}/images/${
-//           req.file.filename
-//         }`,
-//       }
-//     : { ...req.body };
-
-//   delete userObject._userId;
-//   User.findOne({ _id: req.params.id })
-//     .then((user) => {
-//       console.log(user);
-//       if (String(user._id) !== req.auth.userId) {
-//         res.status(401).json({ message: "Not authorized" });
-//       } else {
-//         User.updateOne(
-//           { _id: req.params.id },
-//           { ...userObject, _id: req.params.id }
-//         )
-
-//           .then(() => res.status(200).json({ message: "User updated!" }))
-//           .catch((error) => res.status(500).json({ error }));
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(400).json({ error });
-//     });
-// };
 exports.modifyUser = (req, res, next) => {
   const userObject = req.file
     ? {
@@ -190,12 +158,3 @@ exports.modifyUser = (req, res, next) => {
       res.status(400).json({ error });
     });
 };
-
-// function parseJSON(jsonString) {
-//   try {
-//     return JSON.parse(jsonString);
-//   } catch (error) {
-//     console.log("Error parsing JSON:", error);
-//     return {}; // Retourner un objet vide en cas d'erreur de parsing
-//   }
-// }
