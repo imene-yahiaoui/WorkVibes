@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import User from "../../components/user";
 import "./style.css";
+import { NavLink } from "react-router-dom";
 function UserList() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,9 +28,12 @@ function UserList() {
     setSearchTerm(event.target.value);
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.firstname.toLowerCase().startsWith(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.firstname.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+      user.lastname.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
+  
 
   return (
     <div className="container_userList">
@@ -39,15 +43,17 @@ function UserList() {
         value={searchTerm}
         onChange={handleSearch}
       />
+
       <div className="userList">
         {filteredUsers.map((user) => (
-          <User
-            imageUrl={user.imageUrl}
-            firstName={user.firstname}
-            lastName={user.lastname}
-            job={user.job}
-            key={user._id}
-          />
+          <NavLink to={`/Profile/${user.id}`} key={user._id}>
+            <User
+              imageUrl={user.imageUrl}
+              firstName={user.firstname}
+              lastName={user.lastname}
+              job={user.job}
+            />
+          </NavLink>
         ))}
       </div>
     </div>

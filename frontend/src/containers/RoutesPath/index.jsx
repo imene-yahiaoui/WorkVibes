@@ -8,6 +8,7 @@ import { selectUser } from "../../helpers/features/userSlice";
 import Protect from "../../helpers/protect";
 import UserList from "../../pages/userList";
 import Account from "../../pages/account";
+import Profile from "../../pages/profile";
 const RoutesPath = () => {
   const user = useSelector(selectUser);
 
@@ -17,6 +18,7 @@ const RoutesPath = () => {
         <Route path="/*" element={<NotFound />} />
         <Route path="/UserList" element={<UserList />} />
         <Route path="/Account" element={<Account />} />
+        <Route path="/Profile/:id" element={<Profile />} />
         <Route
           path="/login"
           element={
