@@ -1,0 +1,27 @@
+.user{
+    display: flex;
+    flex-direction: row;
+    width: 262px;
+    height: 100px;
+padding: 10px;
+    align-items: center;
+       column-gap: 37px;
+       box-shadow:5px 10px 18px rgba(0,0,0,.8);;
+}
+.photoUser {
+    width: 70px;
+    height:70px;
+    object-fit: contain;
+    border: 1px solid #FDCEDF;
+    border-radius: 124px;
+  }
+
+.containerUser{
+    display: flex;
+    flex-direction:column;
+}
+.user_name{
+    display: flex;
+    flex-direction:row;
+    column-gap: 21px;
+}

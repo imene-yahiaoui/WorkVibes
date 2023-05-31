@@ -1,19 +1,55 @@
+import React, { useEffect, useState } from "react";
+import User from "../../components/user";
 import "./style.css";
-import { login } from "../../helpers/features/userSlice.js";
-import { useSelector } from "react-redux";
-
 function UserList() {
-  const infos = useSelector(login);
-  console.log(infos);
-  let test = infos?.payload.user?.user?.user.email;
-  console.log("test", test);
-  let name = infos?.payload.user?.user?.user.firstname;
-  console.log(name);
+  const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const requete = await fetch("http://localhost:3000/api/auth/users", {
+          method: "GET",
+        });
+        if (requete.ok) {
+          const response = await requete.json();
+          setUsers(response);
+          console.log("icciiiiiiiii", response);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredUsers = users.filter((user) =>
+    user.firstname.toLowerCase().startsWith(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="home">
-      <h1> userList</h1>
-      <h2>{name} </h2>
+    <div className="container_userList">
+      <input
+        type="text"
+        placeholder="Search users..."
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+      <div className="userList">
+        {filteredUsers.map((user) => (
+          <User
+            imageUrl={user.imageUrl}
+            firstName={user.firstname}
+            lastName={user.lastname}
+            job={user.job}
+            key={user._id}
+          />
+        ))}
+      </div>
     </div>
   );
 }
