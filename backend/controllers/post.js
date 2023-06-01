@@ -1,6 +1,7 @@
 // in controllers/stuff.js
 const fs = require("fs");
 const Post = require("../models/Post");
+const moment = require("moment");
 
 exports.createPost = (req, res, next) => {
   const postObject = req.file
@@ -9,8 +10,12 @@ exports.createPost = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
+        publicationDate: moment().format("MMMM D, YYYY"), // Obtenir la date au format "month day, year"
       }
-    : { ...req.body };
+    : {
+        ...req.body,
+        publicationDate: moment().format("MMMM D, YYYY"), // Obtenir la date au format "month day, year"
+      };
 
   delete postObject._id;
   delete postObject._userId;
