@@ -21,17 +21,20 @@ function Post() {
 
   const deleteImg = () => {
     setImageUrl("");
+    setFiles(null);
   };
 
   const sendPost = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    //si il ya une photo dans le post
+
+    // If there is an image in the post
     if (imageUrl && files) {
       formData.append("imageUrl", files);
       formData.append("description", description);
-      //si il ya pas  une photo dans le post
-    } else {
+    }
+    // If there is no image in the post
+    else {
       formData.append("description", description);
     }
 
@@ -45,7 +48,7 @@ function Post() {
     });
 
     if (result.status === 201) {
-      alert("Les modifications ont été enregistrées avec succès");
+      alert("The changes have been successfully saved");
       setDescription("");
       deleteImg();
     }
@@ -77,7 +80,7 @@ function Post() {
           className="post_photo"
           style={{ display: imageUrl ? "block" : "none" }}
         >
-          <button className="post_icon" onClick={deleteImg}>
+          <button  type="button" className="post_icon" onClick={deleteImg}>
             <AiOutlineClose />
           </button>
           <img src={imageUrl} alt="post" />

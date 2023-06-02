@@ -32,13 +32,16 @@ function AllPosts() {
             const userId = post.userId;
 
             if (!users[userId]) {
-              const userResponse = await fetch(`http://localhost:3000/api/auth/${userId}`, {
-                method: "GET",
-              });
+              const userResponse = await fetch(
+                `http://localhost:3000/api/auth/${userId}`,
+                {
+                  method: "GET",
+                }
+              );
 
               if (userResponse.ok) {
                 const user = await userResponse.json();
-                setUsers(prevUsers => ({ ...prevUsers, [userId]: user })); // Met à jour les informations utilisateur
+                setUsers((prevUsers) => ({ ...prevUsers, [userId]: user })); // Met à jour les informations utilisateur
               }
             }
           }
@@ -49,7 +52,7 @@ function AllPosts() {
     };
 
     fetchPosts();
-  }, [users,posts]);
+  }, [users, posts]);
 
   return (
     <div className="home">
