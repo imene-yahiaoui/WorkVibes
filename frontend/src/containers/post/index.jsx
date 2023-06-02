@@ -8,30 +8,35 @@ import { AiOutlineClose } from "react-icons/ai";
 function Post() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [files, setFiles] = useState("");
   const infos = useSelector(login);
   console.log(infos);
   const imageUser = infos?.payload.user?.user?.user.imageUrl;
 
-  const handleFile = async (e) => {
-    e.preventDefault();
-
+  const handleFile = (e) => {
     const file = e.target.files[0];
     setImageUrl(URL.createObjectURL(file));
+    setFiles(file);
   };
 
-  function deleteImg() {
+  const deleteImg = () => {
     setImageUrl("");
-  }
+  };
 
   const sendPost = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    imageUrl
-      ? formData.append("imageUrl", imageUrl)
-      : formData.append("description", description);
+    //si il ya une photo dans le post
+    if (imageUrl && files) {
+      formData.append("imageUrl", files);
+      formData.append("description", description);
+      //si il ya pas  une photo dans le post
+    } else {
+      formData.append("description", description);
+    }
 
-    let token = localStorage.getItem("token");
-    let result = await fetch(`http://localhost:3000/api/post`, {
+    const token = localStorage.getItem("token");
+    const result = await fetch(`http://localhost:3000/api/post`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -42,6 +47,7 @@ function Post() {
     if (result.status === 201) {
       alert("Les modifications ont été enregistrées avec succès");
       setDescription("");
+      deleteImg();
     }
   };
 
@@ -89,7 +95,9 @@ function Post() {
             />
           </div>
 
-          <button className="postit" onClick={sendPost}>Post it</button>
+          <button className="postit" onClick={sendPost}>
+            Post it
+          </button>
         </div>
       </form>
     </div>
