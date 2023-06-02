@@ -23,14 +23,14 @@ function AllPosts() {
         if (requete.ok) {
           const response = await requete.json();
           console.log(response);
-          setPosts(response);
+          setPosts(response.reverse()); // Inverser l'ordre des résultats
         }
       } catch (e) {
         console.log(e, "error");
       }
     };
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <div className="home">
