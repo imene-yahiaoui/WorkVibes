@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 function AllPosts() {
   const infos = useSelector(login);
   console.log(infos);
-  const imageUser = infos?.payload.user?.user?.user.imageUrl;
+
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
     let token = localStorage.getItem("token");
+
     const fetchPosts = async () => {
       try {
         const requete = await fetch("http://localhost:3000/api/post", {
@@ -20,24 +22,42 @@ function AllPosts() {
             Authorization: `Bearer ${token}`,
           },
         });
+
         if (requete.ok) {
           const response = await requete.json();
-          console.log(response);
-          setPosts(response.reverse()); // Inverser l'ordre des résultats
+          setPosts(response.reverse()); // Met à jour les posts
+
+          // Récupère les informations de l'utilisateur pour chaque post
+          for (const post of response) {
+            const userId = post.userId;
+
+            if (!users[userId]) {
+              const userResponse = await fetch(`http://localhost:3000/api/auth/${userId}`, {
+                method: "GET",
+              });
+
+              if (userResponse.ok) {
+                const user = await userResponse.json();
+                setUsers(prevUsers => ({ ...prevUsers, [userId]: user })); // Met à jour les informations utilisateur
+              }
+            }
+          }
         }
-      } catch (e) {
-        console.log(e, "error");
+      } catch (error) {
+        console.log(error);
       }
     };
+
     fetchPosts();
-  }, [posts]);
+  }, [users,posts]);
 
   return (
     <div className="home">
       {posts.map((post) => (
         <Posts
           key={post._id}
-          imageUser={imageUser}
+          imageUser={users[post.userId]?.imageUrl}
+          firstname={users[post.userId]?.firstname}
           publicationDate={post.publicationDate}
           imageUrl={post.imageUrl}
           description={post.description}

@@ -3,7 +3,7 @@ import "./style.css";
 
 // import { AiOutlineClose } from "react-icons/ai";
 
-function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description}) {
+function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description,firstname}) {
   
 
 
@@ -24,6 +24,9 @@ function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description}) {
             posted on {publicationDate}
           </figcaption>
         </figure>
+        <div>
+<p>{firstname} </p>
+            </div>
 <p> {description}</p>
         <div
           className="post_photo"
