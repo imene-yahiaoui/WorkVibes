@@ -1,39 +1,38 @@
-.user{
-    display: flex;
-    flex-direction: row;
-    width: 262px;
-    height: 100px;
-padding: 10px;
-    align-items: center;
-       column-gap: 37px;
-       box-shadow:5px 10px 18px rgba(0,0,0,.8);;
+.user {
+  display: flex;
+  flex-direction: row;
+  width: 262px;
+  height: 100px;
+  padding: 10px;
+  align-items: center;
+  column-gap: 37px;
+  box-shadow: 5px 10px 18px rgba(0, 0, 0, 0.8);
 }
-.user:hover{
-    
-       box-shadow:5px 10px 18px #F2BED1;
+.user:hover {
+  box-shadow: 5px 10px 18px #f2bed1;
 }
-a:hover{
-    text-decoration: none; 
+a:hover {
+  text-decoration: none;
 }
 .photoUser {
-    width: 70px;
-    height:70px;
-    object-fit: cover;
-    border: 1px solid #FDCEDF;
-    border-radius: 124px;
-  }
-a{
-    text-decoration: none; 
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 1px solid #fdcedf;
+  border-radius: 124px;
 }
-.containerUser{
-    display: flex;
-    flex-direction:column;
-    color: black;
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-.user_name{
-    display: flex;
-    flex-direction:row;
-    column-gap: 21px;
-    color: #3c84ab;
+.containerUser {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  text-decoration: none;
+}
+.user_name {
+  display: flex;
+  flex-direction: row;
+  column-gap: 21px;
+  color: #3c84ab;
 }

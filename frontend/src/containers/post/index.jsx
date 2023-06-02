@@ -89,7 +89,7 @@ function Post() {
             />
           </div>
 
-          <button onClick={sendPost}>Envoyer</button>
+          <button className="postit" onClick={sendPost}>Post it</button>
         </div>
       </form>
     </div>
