@@ -8,10 +8,10 @@ function AllPosts() {
   const infos = useSelector(login);
 
   const id = infos?.payload.user?.user?.user._id;
-  console.log("Id", id);
+
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
-  
+
   useEffect(() => {
     let token = localStorage.getItem("token");
 
@@ -31,7 +31,7 @@ function AllPosts() {
           // Récupère les informations de l'utilisateur pour chaque post
           for (const post of response) {
             const userId = post.userId;
- 
+
             if (!users[userId]) {
               const userResponse = await fetch(
                 `http://localhost:3000/api/auth/${userId}`,
@@ -55,9 +55,6 @@ function AllPosts() {
     fetchPosts();
   }, [users, posts]);
 
-
-
-
   return (
     <div className="home">
       {posts.map((post) => (
@@ -68,15 +65,10 @@ function AllPosts() {
           lastname={users[post.userId]?.lastname}
           publicationDate={post.publicationDate}
           imageUrl={post.imageUrl}
-          description={post.description}
+          descriptionPost={post.description}
           sameUser={id === post.userId ? "true" : ""}
         />
-      
-         
-       
       ))}
-    
-   
     </div>
   );
 }

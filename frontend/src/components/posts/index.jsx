@@ -1,9 +1,5 @@
 import "./style.css";
-import { Dropdown } from "react-bootstrap";
-import { FiMoreHorizontal } from "react-icons/fi";
-import { BsFillTrash3Fill, BsPencilFill } from "react-icons/bs";
-
-import { useState } from "react";
+import OptionPost from "../optionPost";
 
 function Posts({
   imageUser,
@@ -14,13 +10,10 @@ function Posts({
   firstname,
   lastname,
   sameUser,
+  descriptionPost,
 }) {
   const cover = "../images/user.png";
-  const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
   return (
     <div className="post postCadre">
       <figure className="postContiner">
@@ -38,24 +31,11 @@ function Posts({
           posted on {publicationDate}
         </figcaption>
       </figure>
-      <div className="postEdit">
-        <p> {description}</p>
 
-        <Dropdown style={{ display: sameUser ? "block" : "none" }}>
-          <Dropdown.Toggle variant="light" id="dropdown-basic">
-            <FiMoreHorizontal />
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item onSelect={() => handleOptionSelect("Edit")}>
-              <BsFillTrash3Fill /> Edit
-            </Dropdown.Item>
-            <Dropdown.Item onSelect={() => handleOptionSelect("Delete")}>
-              <BsPencilFill /> Delete
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+      <div className="option_post">
+        <OptionPost descriptionPost={descriptionPost} sameUser={sameUser} />
       </div>
+
       <div
         className="post_photo postPhoto"
         style={{ display: imageUrl ? "block" : "none" }}

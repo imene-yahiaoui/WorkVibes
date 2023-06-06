@@ -2,11 +2,15 @@ import "./style.css";
 import { useParams } from "react-router-dom";
 import Posts from "../../components/posts";
 import { useEffect, useState } from "react";
+import { login } from "../../helpers/features/userSlice.js";
+import { useSelector } from "react-redux";
 function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const { _id } = useParams();
+  const infos = useSelector(login);
 
+  const id = infos?.payload.user?.user?.user._id;
   const fetchProjects = async () => {
     let requete = await fetch(`http://localhost:3000/api/auth/${_id}`, {
       method: "GET",
@@ -84,7 +88,8 @@ function Profile() {
             lastname={user.lastname}
             publicationDate={post.publicationDate}
             imageUrl={post.imageUrl}
-            description={post.description}
+            descriptionPost={post.description}
+       sameUser={id === post.userId ? "true" : ""}
           />
         ))}
     </div>
