@@ -2,7 +2,6 @@ import "./style.css";
 import { useParams } from "react-router-dom";
 import Posts from "../../components/posts";
 import { useEffect, useState } from "react";
-
 function Profile() {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -82,6 +81,7 @@ function Profile() {
             key={post._id}
             imageUser={user.imageUrl}
             firstname={user.firstname}
+            lastname={user.lastname}
             publicationDate={post.publicationDate}
             imageUrl={post.imageUrl}
             description={post.description}
