@@ -1,9 +1,9 @@
 import "./style.css";
 
 
-// import { AiOutlineClose } from "react-icons/ai";
+ 
 
-function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description,firstname}) {
+function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description,firstname,lastname}) {
   
 
 
@@ -11,9 +11,9 @@ function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description,firstn
   const cover = "../images/user.png";
 
   return (
-    <div className="post">
+    <div className="post postCadre">
      
-        <figure className="post_continer">
+        <figure className="postContiner">
           {imageUser ? (
             <img className="photoUser" alt="profile" src={imageUser} />
           ) : (
@@ -21,20 +21,19 @@ function Posts({imageUser,publicationDate ,imageUrl,deleteImg,description,firstn
           )}
 
           <figcaption>
+          <b className="description">{firstname}{  } { lastname} </b>
             posted on {publicationDate}
           </figcaption>
         </figure>
         <div>
-<p>{firstname} </p>
+
             </div>
 <p> {description}</p>
         <div
-          className="post_photo"
+          className="post_photo postPhoto"
           style={{ display: imageUrl ? "block" : "none" }}
         >
-          <button className="post_icon" onClick={deleteImg}>
-            {/* <AiOutlineClose /> */}
-          </button>
+          
           <img src={imageUrl} alt="post" />
         </div>
 

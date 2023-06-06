@@ -1,0 +1,25 @@
+.postContiner {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+
+  column-gap: 72px;
+}
+.description {
+  font-size: 26px;
+  color: #3c84ab;
+  display: block;
+}
+
+.postPhoto {
+  border: 1px solid #3c84ab;
+  padding-bottom: 0;
+  border-radius: 15px;
+}
+.postPhoto img {
+  border-radius: 15px;
+  object-fit: fill;
+}
+.postCadre {
+  align-items: flex-start;
+}

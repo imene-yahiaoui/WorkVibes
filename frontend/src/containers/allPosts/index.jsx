@@ -61,6 +61,7 @@ function AllPosts() {
           key={post._id}
           imageUser={users[post.userId]?.imageUrl}
           firstname={users[post.userId]?.firstname}
+          lastname={users[post.userId]?.lastname}
           publicationDate={post.publicationDate}
           imageUrl={post.imageUrl}
           description={post.description}
