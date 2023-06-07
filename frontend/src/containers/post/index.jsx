@@ -80,7 +80,7 @@ function Post() {
           className="post_photo"
           style={{ display: imageUrl ? "block" : "none" }}
         >
-          <button  type="button" className="post_icon" onClick={deleteImg}>
+          <button type="button" className="post_icon" onClick={deleteImg}>
             <AiOutlineClose />
           </button>
           <img src={imageUrl} alt="post" />

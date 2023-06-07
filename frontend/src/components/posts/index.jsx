@@ -34,7 +34,11 @@ function Posts({
       </figure>
 
       <div className="option_post">
-        <OptionPost descriptionPost={descriptionPost} sameUser={sameUser} idPost={idPost}/>
+        <OptionPost
+          descriptionPost={descriptionPost}
+          sameUser={sameUser}
+          idPost={idPost}
+        />
       </div>
 
       <div

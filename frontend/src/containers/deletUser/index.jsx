@@ -31,7 +31,6 @@ function DeletUser() {
     });
 
     if (response.ok) {
-   
       localStorage.removeItem("token");
       navigate("/Login");
       dispatch(logout());
