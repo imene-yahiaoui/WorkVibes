@@ -34,8 +34,6 @@ exports.createPost = (req, res, next) => {
     });
 };
 
-
-
 exports.getOnePost = (req, res, next) => {
   Post.findOne({
     _id: req.params.id,
@@ -84,7 +82,9 @@ exports.modifyPost = (req, res, next) => {
 // exports.deletePost = (req, res, next) => {
 //   Post.findOne({ _id: req.params.id })
 //     .then((post) => {
-//       if (String(user._id) != req.auth.userId) {
+//       console.log("11111111", post.userId );
+//       console.log("2222222222222", req.auth.userId);
+//       if (post.userId  != req.auth.userId) {
 //         res.status(401).json({ message: "Not authorized" });
 //       } else {
 //         const filename = post.imageUrl.split("/images/")[1];
@@ -97,17 +97,15 @@ exports.modifyPost = (req, res, next) => {
 //         });
 //       }
 //     })
-//     .catch((error) => {
-//       res.status(500).json({ error });
-//     });
+// .catch((error) => {
+//   res.status(500).json({ error });
+// });
 // };
 
 exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      console.log("11111111", String(user._id));
-      console.log("2222222222222", req.auth.userId);
-      if (String(user._id) !== req.auth.userId) {
+      if (post.userId != req.auth.userId) {
         res.status(401).json({ message: "Not authorized" });
       } else {
         // S'il y a une image
