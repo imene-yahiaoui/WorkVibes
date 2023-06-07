@@ -11,6 +11,7 @@ function Posts({
   lastname,
   sameUser,
   descriptionPost,
+  idPost,
 }) {
   const cover = "../images/user.png";
 
@@ -33,7 +34,7 @@ function Posts({
       </figure>
 
       <div className="option_post">
-        <OptionPost descriptionPost={descriptionPost} sameUser={sameUser} />
+        <OptionPost descriptionPost={descriptionPost} sameUser={sameUser} idPost={idPost}/>
       </div>
 
       <div

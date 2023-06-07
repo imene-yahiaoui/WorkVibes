@@ -34,27 +34,7 @@ exports.createPost = (req, res, next) => {
     });
 };
 
-// exports.createPost = (req, res, next) => {
-//   const postObject = JSON.parse(req.body.post);
-//   delete postObject._id;
-//   delete postObject._userId;
-//   const post = new Post({
-//     ...postObject,
-//     userId: req.auth.userId,
-//     imageUrl: `${req.protocol}://${req.get("host")}/images/${
-//       req.file.filename
-//     }`,
-//   });
 
-//   post
-//     .save()
-//     .then(() => {
-//       res.status(201).json({ message: "Objet enregistré !" });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({ error });
-//     });
-// };
 
 exports.getOnePost = (req, res, next) => {
   Post.findOne({

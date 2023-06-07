@@ -67,6 +67,7 @@ function AllPosts() {
           imageUrl={post.imageUrl}
           descriptionPost={post.description}
           sameUser={id === post.userId ? "true" : ""}
+          idPost={post._id}
         />
       ))}
     </div>
