@@ -5,68 +5,53 @@ const moment = require("moment");
 
 //createComment
 exports.createComment = (req, res, next) => {
-    const commentObject = {
-      ...req.body,
-      publicationDate: moment().format("MMMM D, YYYY"), // Obtaining the date in "Month day, Year" format
-      userId: req.auth.userId,
-      postId: req.params.id, // Retrieve the ID of the post from the request parameters in fetch 
-    };
-  
-    const newComment = new Comment(commentObject);
-  
-    newComment
-      .save()
-      .then(() => {
-        res.status(201).json({ message: "Comment saved!" });
-      })
-      .catch((error) => {
-        res.status(400).json({ error });
-      });
+  const commentObject = {
+    ...req.body,
+    publicationDate: moment().format("MMMM D, YYYY"), // Obtaining the date in "Month day, Year" format
+    userId: req.auth.userId,
+    postId: req.params.id, // Retrieve the ID of the post from the request parameters in fetch
   };
-// exports.createComment = (req, res, next) => {
-//   const commentObject = {
-//         ...req.body,
-//         publicationDate: moment().format("MMMM D, YYYY"), // Obtenir la date au format "month day, year"
-     
-//     }
-//     comment.findOne({ _id: req.params.id })
-//     .then((comment) => {
-//   const comment = new Comment({
-//     ...commentObject,
-//     userId: req.auth.userId,
-//     _id:req.auth._id,
-//   });
-//     })
-//   comment
-//     .save()
-//     .then(() => {
-//       res.status(201).json({ message: "Objet enregistré !" });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({ error });
-//     });
-// };
+
+  const newComment = new Comment(commentObject);
+
+  newComment
+    .save()
+    .then(() => {
+      res.status(201).json({ message: "Comment saved!" });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
+
+//find post by id
+
+exports.getCommentById = (req, res, next) => {
+  const commentId = req.params.id;
+  Comment.findById(commentId)
+    .then((comment) => {
+      if (!comment) {
+        return res.status(404).json({ message: "Comment not found" });
+      }
+      res.status(200).json(comment);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+};
 
 //modifyComment
 exports.modifyComment = (req, res, next) => {
-  const postObject = req.file
-    ? {
-        ...JSON.parse(req.body.post),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body };
+  const commentObject = { ...req.body };
 
-  delete postObject._userId;
-  Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      if (post.userId != req.auth.userId) {
+  Comment.findOne({ _id: req.params.id })
+    .then((comment) => {
+      if (comment.userId != req.auth.userId) {
         res.status(401).json({ message: "Not authorized" });
       } else {
-        Post.updateOne(
+        Comment.updateOne(
           { _id: req.params.id },
-          { ...postObject, _id: req.params.id }
+          { ...commentObject, _id: req.params.id }
         )
           .then(() => res.status(200).json({ message: "Objet modifié!" }))
           .catch((error) => res.status(401).json({ error }));
@@ -76,7 +61,6 @@ exports.modifyComment = (req, res, next) => {
       res.status(400).json({ error });
     });
 };
-
 //deleteComment
 
 exports.deleteComment = (req, res, next) => {

@@ -78,29 +78,7 @@ exports.modifyPost = (req, res, next) => {
     });
 };
 
-//delete
-// exports.deletePost = (req, res, next) => {
-//   Post.findOne({ _id: req.params.id })
-//     .then((post) => {
-//       console.log("11111111", post.userId );
-//       console.log("2222222222222", req.auth.userId);
-//       if (post.userId  != req.auth.userId) {
-//         res.status(401).json({ message: "Not authorized" });
-//       } else {
-//         const filename = post.imageUrl.split("/images/")[1];
-//         fs.unlink(`images/${filename}`, () => {
-//           Post.deleteOne({ _id: req.params.id })
-//             .then(() => {
-//               res.status(200).json({ message: "User deleted!" });
-//             })
-//             .catch((error) => res.status(401).json({ error }));
-//         });
-//       }
-//     })
-// .catch((error) => {
-//   res.status(500).json({ error });
-// });
-// };
+
 
 exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
