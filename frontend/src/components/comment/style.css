@@ -1,0 +1,22 @@
+.comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  column-gap: 12px;
+  padding-top: 30px;
+}
+
+.comment_continer {
+  column-gap: 14px;
+  border: none;
+}
+
+.sendComment {
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+}
+.sendComment:hover {
+  color: #3c84ab;
+}

@@ -95,9 +95,9 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Modal show={show} onHide={deletePost}>
+        <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Supprime</Modal.Title>
+            <Modal.Title>Delete</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             Are you sure you want to delete this account?{" "}

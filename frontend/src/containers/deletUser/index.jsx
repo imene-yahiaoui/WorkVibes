@@ -43,9 +43,9 @@ function DeletUser() {
       <button type="submit" className="sign-in-button" onClick={delet}>
         Delete
       </button>
-      <Modal show={show} onHide={deleteUser}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Supprime</Modal.Title>
+          <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this account? </Modal.Body>
         <Modal.Footer>

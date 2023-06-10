@@ -64,27 +64,23 @@ exports.modifyComment = (req, res, next) => {
 //deleteComment
 
 exports.deleteComment = (req, res, next) => {
-Comment.findOne({ _id: req.params.id })
+  Comment.findOne({ _id: req.params.id })
     .then((comment) => {
       if (comment.userId != req.auth.userId) {
         res.status(401).json({ message: "Not authorized" });
       } else {
-       
         comment
-            .deleteOne({ _id: req.params.id })
-            .then(() => {
-              res.status(200).json({ message: "Post deleted!" });
-            })
-            .catch((error) => res.status(500).json({ error }));
-        }
-      
+          .deleteOne({ _id: req.params.id })
+          .then(() => {
+            res.status(200).json({ message: "Post deleted!" });
+          })
+          .catch((error) => res.status(500).json({ error }));
+      }
     })
     .catch((error) => {
       res.status(500).json({ error });
     });
 };
-
-
 
 //getAllComment
 exports.getAllComment = (req, res, next) => {
