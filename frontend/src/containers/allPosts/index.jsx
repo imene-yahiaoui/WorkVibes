@@ -8,7 +8,7 @@ function AllPosts() {
   const infos = useSelector(login);
 
   const id = infos?.payload.user?.user?.user._id;
-
+ 
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
 
@@ -55,6 +55,9 @@ function AllPosts() {
     fetchPosts();
   }, [users, posts]);
 
+  
+ 
+
   return (
     <div className="home">
       {posts.map((post) => (
@@ -68,8 +71,12 @@ function AllPosts() {
           descriptionPost={post.description}
           sameUser={id === post.userId ? "true" : ""}
           idPost={post._id}
+        
+
         />
+    
       ))}
+
     </div>
   );
 }

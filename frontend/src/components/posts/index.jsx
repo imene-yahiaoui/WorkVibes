@@ -1,6 +1,7 @@
 import "./style.css";
 import OptionPost from "../optionPost";
 import Comment from "../comment";
+
 function Posts({
   imageUser,
   publicationDate,
