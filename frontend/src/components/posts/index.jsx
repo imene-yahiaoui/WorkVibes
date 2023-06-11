@@ -15,7 +15,7 @@ function Posts({
   idPost,
 }) {
   const cover = "../images/user.png";
-
+  
   return (
     <div className="post postCadre">
       <section className="sectionPost">

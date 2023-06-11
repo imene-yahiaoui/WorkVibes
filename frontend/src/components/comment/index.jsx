@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { LuSend } from "react-icons/lu";
 import { login } from "../../helpers/features/userSlice.js";
-
+import "./style.css";
 function Comment({ idComment }) {
   const [comment, setComment] = useState("");
   const infos = useSelector(login);
@@ -40,7 +40,7 @@ function Comment({ idComment }) {
 
   return (
     <form method="post" className="comment" encType="multipart/form-data">
-      <figure className="post_container comment_container">
+      <figure className="comment_continer ">
         {imageUser ? (
           <img className="photoUser" alt="profile" src={imageUser} />
         ) : (

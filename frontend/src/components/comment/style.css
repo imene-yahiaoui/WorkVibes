@@ -9,6 +9,8 @@
 
 .comment_continer {
   column-gap: 14px;
+  display: flex;
+  flex-direction: row;
   border: none;
 }
 
