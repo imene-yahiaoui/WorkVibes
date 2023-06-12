@@ -27,7 +27,7 @@ function CommentsList({ idCommentList }) {
         if (requete.ok) {
           const response = await requete.json();
  console.log( response[2].comment)
-          setPosts(response.reverse()); // Met à jour les posts
+          setPosts(response); // Met à jour les posts
 
           // Récupère les informations de l'utilisateur pour chaque post
           for (const post of response) {

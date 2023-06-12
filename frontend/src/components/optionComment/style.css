@@ -1,3 +1,7 @@
 .commentEdit{
     padding: 0 21px;
 }
+#dropdown-basic {
+    border: none  ;
+    background: none;
+  }

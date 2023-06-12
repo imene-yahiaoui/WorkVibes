@@ -85,7 +85,7 @@ function OptionComment({ commentPost, sameUser, idPost }) {
 
       <div style={{ display: sameUser ? "block" : "none" }}>
         <Dropdown>
-          <Dropdown.Toggle variant="light" id="dropdown-basic">
+          <Dropdown.Toggle variant="light" id="dropdown-basic" >
             <FiMoreHorizontal />
           </Dropdown.Toggle>
           <Dropdown.Menu>

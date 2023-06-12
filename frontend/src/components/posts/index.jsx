@@ -13,7 +13,6 @@ function Posts({
   sameUser,
   descriptionPost,
   idPost,
-
 }) {
   const cover = "../images/user.png";
 
@@ -51,12 +50,8 @@ function Posts({
           <img src={imageUrl} alt="post" />
         </div>
       </section>
-
+      <CommentsList idCommentList={idPost} />
       <Comment idComment={idPost} />
-
-      
-        <CommentsList idCommentList={idPost} />
-      
     </div>
   );
 }
