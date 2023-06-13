@@ -9,7 +9,7 @@ function CommentSection({
   firstname,
   lastname,
   sameUser,
-
+  idcomment,
   idPost,
 }) {
   const cover = "../images/user.png";
@@ -38,6 +38,7 @@ function CommentSection({
             commentPost={commentPost}
             sameUser={sameUser}
             idPost={idPost}
+            idcomment={idcomment}
           />
         </div>
       </section>

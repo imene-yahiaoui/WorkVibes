@@ -6,8 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./style.css";
 
-function OptionComment({ commentPost, sameUser, idPost }) {
-  const [description, setDescription] = useState(commentPost);
+function OptionComment({ commentPost, sameUser, idPost, idcomment }) {
+  const [comment, setComment] = useState(commentPost);
   const [editMode, setEditMode] = useState(false);
   const [show, setShow] = useState(false);
   //pour cancel la supression
@@ -16,12 +16,13 @@ function OptionComment({ commentPost, sameUser, idPost }) {
   function delet() {
     setShow(true);
   }
+  console.log("iddddddcomment", idcomment);
   //pour supremier le post
   const deletePost = async (e) => {
     e.preventDefault();
 
     const request = await fetch(
-      `  http://localhost:3000/api/comment/${idPost}`,
+      `  http://localhost:3000/api/comment/${idcomment}`,
       {
         method: "DELETE",
         headers: {
@@ -43,21 +44,24 @@ function OptionComment({ commentPost, sameUser, idPost }) {
   //sauvgarder les modification de description
   const saveDescription = async (e) => {
     e.preventDefault();
-    if (description.length === 0) {
+    if (comment.length === 0) {
       alert("Please enter a description.");
       return;
     }
     //fetche put pour la description
-    const formData = new FormData();
-    formData.append("comment", description);
 
-    const result = await fetch(` http://localhost:3000/api/comment/${idPost}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
+    const result = await fetch(
+      ` http://localhost:3000/api/comment/${idcomment}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        body: JSON.stringify({ comment: comment }),
+      }
+    );
 
     if (result.status === 200) {
       setEditMode(false);
@@ -72,8 +76,8 @@ function OptionComment({ commentPost, sameUser, idPost }) {
           <input
             type="text"
             className="post_inputText"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
           <button onClick={saveDescription} type="submit">
             Save
@@ -85,7 +89,7 @@ function OptionComment({ commentPost, sameUser, idPost }) {
 
       <div style={{ display: sameUser ? "block" : "none" }}>
         <Dropdown>
-          <Dropdown.Toggle variant="light" id="dropdown-basic" >
+          <Dropdown.Toggle variant="light" id="dropdown-basic">
             <FiMoreHorizontal />
           </Dropdown.Toggle>
           <Dropdown.Menu>
