@@ -1,10 +1,10 @@
 import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
 import { useSelector } from "react-redux";
-import CommentSection from "../commentSection";
+import CommentSection from "../../components/commentSection";
 import { useEffect, useState } from "react";
-import CommentsNumber from "../commentsNumber";
-import Comment from "../comment";
+import CommentsNumber from "../../components/commentsNumber";
+import Comment from "../../components/comment";
 function CommentsList({ idCommentList }) {
   const infos = useSelector(login);
 
