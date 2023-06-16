@@ -2,6 +2,7 @@ import "./style.css";
 import OptionPost from "../optionPost";
 import Comment from "../comment";
 import CommentsList from "../CommentsList";
+
 function Posts({
   imageUser,
   publicationDate,
@@ -13,9 +14,10 @@ function Posts({
   sameUser,
   descriptionPost,
   idPost,
+ 
 }) {
   const cover = "../images/user.png";
-
+   
   return (
     <div className="post postCadre">
       <section className="sectionPost">
@@ -50,8 +52,9 @@ function Posts({
           <img src={imageUrl} alt="post" />
         </div>
       </section>
-      <CommentsList idCommentList={idPost} />
-      <Comment idComment={idPost} />
+     
+      <CommentsList idCommentList={idPost}   />
+      {/* <Comment idComment={idPost} /> */}
     </div>
   );
 }

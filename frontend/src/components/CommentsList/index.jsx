@@ -3,7 +3,8 @@ import { login } from "../../helpers/features/userSlice.js";
 import { useSelector } from "react-redux";
 import CommentSection from "../commentSection";
 import { useEffect, useState } from "react";
-
+import CommentsNumber from "../commentsNumber";
+import Comment from "../comment";
 function CommentsList({ idCommentList }) {
   const infos = useSelector(login);
 
@@ -11,6 +12,7 @@ function CommentsList({ idCommentList }) {
 
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
+  const [commentsOfNumber, setCommentsOfNumber] = useState(0);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -26,8 +28,9 @@ function CommentsList({ idCommentList }) {
 
         if (requete.ok) {
           const response = await requete.json();
- console.log( response[2].comment)
-          setPosts(response); // Met à jour les posts
+
+          setPosts(response);
+          // Met à jour les posts
 
           // Récupère les informations de l'utilisateur pour chaque post
           for (const post of response) {
@@ -56,23 +59,33 @@ function CommentsList({ idCommentList }) {
     fetchPosts();
   }, [users, posts]);
 
-  //filtre  id for post === id for post id in comment fetch
+  useEffect(() => {
+    const number = posts.filter((post) => post.postId === idCommentList).length;
+    setCommentsOfNumber(number);
+  }, [posts, idCommentList]);
+
+  // Filtre les commentaires pour n'afficher que ceux correspondant à l'id du post
+  const filteredComments = posts.filter(
+    (post) => post.postId === idCommentList
+  );
+
+  // filtre  id for post === id for post id in comment fetch
   return (
     <div className="commentList">
-      {posts
-        .filter((post) => post.postId === idCommentList)
-        .map((post) => (
-          <CommentSection
-            key={post._id}
-            imageUser={users[post.userId]?.imageUrl}
-            firstname={users[post.userId]?.firstname}
-            lastname={users[post.userId]?.lastname}
-            publicationDate={post.publicationDate}
-            commentPost={post.comment}
-            sameUser={id === post.userId ? "true" : ""}
-            idcomment={post._id}
-          />
-        ))}
+      <CommentsNumber number={commentsOfNumber} />
+      <Comment idComment={idCommentList} />
+      {filteredComments.map((post) => (
+        <CommentSection
+          key={post._id}
+          imageUser={users[post.userId]?.imageUrl}
+          firstname={users[post.userId]?.firstname}
+          lastname={users[post.userId]?.lastname}
+          publicationDate={post.publicationDate}
+          commentPost={post.comment}
+          sameUser={id === post.userId ? "true" : ""}
+          idcomment={post._id}
+        />
+      ))}
     </div>
   );
 }

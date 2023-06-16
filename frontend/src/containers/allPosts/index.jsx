@@ -12,6 +12,8 @@ function AllPosts() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
 
+
+
   useEffect(() => {
     let token = localStorage.getItem("token");
 
@@ -55,8 +57,11 @@ function AllPosts() {
     fetchPosts();
   }, [users, posts]);
 
+
+
+
   
- 
+
 
   return (
     <div className="home">
