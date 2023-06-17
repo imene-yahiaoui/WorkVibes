@@ -9,10 +9,15 @@ function Like() {
 
 
     return(
-        <div>
-            
-           <AiFillLike/> 
-            <AiFillDislike/>
+        <div className="likeContiner">
+            <div className="like">
+           <AiFillLike color='green'/> 
+           <p> 2 </p>
+           </div>
+           <div className="like">
+            <AiFillDislike color='red'/>
+            <p> 29 </p>
+            </div>
             </div>
             )
 

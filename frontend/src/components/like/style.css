@@ -1,0 +1,14 @@
+.like,
+.likeContiner {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  font-size: 29px;
+}
+.like p {
+  font-size: 20px;
+}
+
+.likeContiner {
+  column-gap: 20px;
+}

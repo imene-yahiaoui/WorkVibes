@@ -7,6 +7,8 @@ import CommentsNumber from "../../components/commentsNumber";
 import { Collapse } from "react-collapse";
 import Comment from "../../components/comment";
 import { FcExpand } from "react-icons/fc";
+import { FcCollapse } from "react-icons/fc";
+
 import Like from "../../components/like"
 function CommentsList({ idCommentList }) {
   const infos = useSelector(login);
@@ -88,9 +90,15 @@ function CommentsList({ idCommentList }) {
     
       </div>
       {commentsOfNumber ? (
-        <button onClick={handleCollapseToggle}>
-          <FcExpand />
-          <Collapse isOpened={isCollapseOpen}>
+        <button className="CollapseToggle" onClick={handleCollapseToggle}>
+          {isCollapseOpen?
+        <FcCollapse  font-size="30px"  />
+          :
+         
+          <FcExpand font-size="30px" />
+}
+          <Collapse  isOpened={isCollapseOpen}>
+            <div className="Collapse">
             {filteredComments.map((post) => (
               <CommentSection
                 key={post._id}
@@ -103,6 +111,7 @@ function CommentsList({ idCommentList }) {
                 idcomment={post._id}
               />
             ))}
+            </div>
           </Collapse>
         </button>
       ) : (
