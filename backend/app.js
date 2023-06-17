@@ -3,6 +3,8 @@ const path = require("path");
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
+const likeRoutes = require("./routes/like");
+const dislikeRoutes = require("./routes/like");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose
@@ -31,6 +33,8 @@ app.use(bodyParser.json());
 app.use("/api/post", postRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/comment", commentRoutes);
+app.use("/api/like", likeRoutes);
+app.use("/api/dislike", dislikeRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
