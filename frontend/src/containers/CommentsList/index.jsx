@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import CommentSection from "../../components/commentSection";
 import { useEffect, useState } from "react";
 import CommentsNumber from "../../components/commentsNumber";
+import { Collapse } from "react-collapse";
 import Comment from "../../components/comment";
+import { FcExpand } from "react-icons/fc";
 function CommentsList({ idCommentList }) {
   const infos = useSelector(login);
 
@@ -13,6 +15,7 @@ function CommentsList({ idCommentList }) {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
   const [commentsOfNumber, setCommentsOfNumber] = useState(0);
+  const [isCollapseOpen, setIsCollapseOpen] = useState(false);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -68,12 +71,20 @@ function CommentsList({ idCommentList }) {
   const filteredComments = posts.filter(
     (post) => post.postId === idCommentList
   );
+  //pour  ouvrire ou fermer les collapse de comments 
+  const handleCollapseToggle = () => {
+    setIsCollapseOpen(!isCollapseOpen);
+  };
 
   // filtre  id for post === id for post id in comment fetch
   return (
     <div className="commentList">
+      {/* le nombre des commentaires  */}
       <CommentsNumber number={commentsOfNumber} />
-      <Comment idComment={idCommentList} />
+      {commentsOfNumber?
+      <button onClick={handleCollapseToggle}>
+        <FcExpand/>
+      <Collapse isOpened={isCollapseOpen}>
       {filteredComments.map((post) => (
         <CommentSection
           key={post._id}
@@ -86,6 +97,10 @@ function CommentsList({ idCommentList }) {
           idcomment={post._id}
         />
       ))}
+      </Collapse>
+      </button> :""}
+       {/* ajoute un commentaire */}
+       <Comment idComment={idCommentList} />
     </div>
   );
 }
