@@ -6,3 +6,8 @@ flex-direction:column;
 row-gap: 50px;
 
 }
+.comment-stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

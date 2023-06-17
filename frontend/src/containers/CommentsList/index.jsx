@@ -7,6 +7,7 @@ import CommentsNumber from "../../components/commentsNumber";
 import { Collapse } from "react-collapse";
 import Comment from "../../components/comment";
 import { FcExpand } from "react-icons/fc";
+import Like from "../../components/like"
 function CommentsList({ idCommentList }) {
   const infos = useSelector(login);
 
@@ -71,7 +72,7 @@ function CommentsList({ idCommentList }) {
   const filteredComments = posts.filter(
     (post) => post.postId === idCommentList
   );
-  //pour  ouvrire ou fermer les collapse de comments 
+  //pour  ouvrire ou fermer les collapse de comments
   const handleCollapseToggle = () => {
     setIsCollapseOpen(!isCollapseOpen);
   };
@@ -79,28 +80,36 @@ function CommentsList({ idCommentList }) {
   // filtre  id for post === id for post id in comment fetch
   return (
     <div className="commentList">
+      <div className="comment-stats">
+      <Like/>
       {/* le nombre des commentaires  */}
       <CommentsNumber number={commentsOfNumber} />
-      {commentsOfNumber?
-      <button onClick={handleCollapseToggle}>
-        <FcExpand/>
-      <Collapse isOpened={isCollapseOpen}>
-      {filteredComments.map((post) => (
-        <CommentSection
-          key={post._id}
-          imageUser={users[post.userId]?.imageUrl}
-          firstname={users[post.userId]?.firstname}
-          lastname={users[post.userId]?.lastname}
-          publicationDate={post.publicationDate}
-          commentPost={post.comment}
-          sameUser={id === post.userId ? "true" : ""}
-          idcomment={post._id}
-        />
-      ))}
-      </Collapse>
-      </button> :""}
-       {/* ajoute un commentaire */}
-       <Comment idComment={idCommentList} />
+      {/* la condition si il ya des commontaire afiche le button de collapse sinon ne l'affiche pas  */}
+    
+      </div>
+      {commentsOfNumber ? (
+        <button onClick={handleCollapseToggle}>
+          <FcExpand />
+          <Collapse isOpened={isCollapseOpen}>
+            {filteredComments.map((post) => (
+              <CommentSection
+                key={post._id}
+                imageUser={users[post.userId]?.imageUrl}
+                firstname={users[post.userId]?.firstname}
+                lastname={users[post.userId]?.lastname}
+                publicationDate={post.publicationDate}
+                commentPost={post.comment}
+                sameUser={id === post.userId ? "true" : ""}
+                idcomment={post._id}
+              />
+            ))}
+          </Collapse>
+        </button>
+      ) : (
+        ""
+      )}
+      {/* ajoute un commentaire */}
+      <Comment idComment={idCommentList} />
     </div>
   );
 }
