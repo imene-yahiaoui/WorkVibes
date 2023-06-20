@@ -16,7 +16,7 @@ function OptionComment({ commentPost, sameUser, idPost, idcomment }) {
   function delet() {
     setShow(true);
   }
-  console.log("iddddddcomment", idcomment);
+ 
   //pour supremier le post
   const deletePost = async (e) => {
     e.preventDefault();

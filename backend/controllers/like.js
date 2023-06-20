@@ -4,8 +4,8 @@ const Publication = require("../models/Post");
 exports.like = async (req, res) => {
   try {
     const postId = req.params.id;
-  
-    const userId = req.body.userId
+
+    const userId = req.body.userId;
     console.log(postId), console.log(userId);
     // Vérifier si l'utilisateur a déjà aimé la publication
     const publication = await Publication.findById(postId);
@@ -25,5 +25,3 @@ exports.like = async (req, res) => {
     res.status(500).json({ erreur: "Internal server error." });
   }
 };
-
-

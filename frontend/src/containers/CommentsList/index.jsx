@@ -83,7 +83,7 @@ function CommentsList({ idCommentList }) {
   return (
     <div className="commentList">
       <div className="comment-stats">
-      <Like/>
+      <Like userId={id}   id={idCommentList } />
       {/* le nombre des commentaires  */}
       <CommentsNumber number={commentsOfNumber} />
       {/* la condition si il ya des commontaire afiche le button de collapse sinon ne l'affiche pas  */}
