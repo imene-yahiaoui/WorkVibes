@@ -4,7 +4,7 @@ const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
 const likeRoutes = require("./routes/like");
-const dislikeRoutes = require("./routes/like");
+const dislikeRoutes = require("./routes/dislike");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose
@@ -30,6 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/post", postRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/comment", commentRoutes);
