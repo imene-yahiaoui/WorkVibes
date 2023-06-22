@@ -49,7 +49,7 @@ function Profile() {
     };
 
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <div className="home">
@@ -90,6 +90,9 @@ function Profile() {
             imageUrl={post.imageUrl}
             descriptionPost={post.description}
        sameUser={id === post.userId ? "true" : ""}
+       idPost={post._id}
+       countlike={post.likes.length}
+       countDislike={post.dislikes.length}
           />
         ))}
     </div>

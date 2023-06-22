@@ -12,3 +12,8 @@
 .likeContiner {
   column-gap: 20px;
 }
+.like{
+background-color:transparent;
+border: none;
+
+}
