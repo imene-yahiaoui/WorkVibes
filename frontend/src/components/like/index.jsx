@@ -1,16 +1,11 @@
 import "./style.css";
-import React, { useState } from "react";
+
 import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
 
- 
-function Like({userId , id }) {
-  const [countlike, setCountlike] = useState();
- 
- 
+function Like({ userId, id, countlike, countDislike }) {
   const token = localStorage.getItem("token");
- 
-console.log("le userid est ",userId)
+
   const handleLike = async (e) => {
     e.preventDefault();
     const fetchLike = await fetch(` http://localhost:3000/api/like/${id}`, {
@@ -24,25 +19,32 @@ console.log("le userid est ",userId)
     });
 
     if (fetchLike.status === 200) {
-
-        const requete = await fetch(`http://localhost:3000/api/post/${id}`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-  
-          if (requete.ok) {
-            // const response = await requete.json();
-            // setCountlike(response.like.length()); // Met à jour les posts
-            alert("le like marche bien ")
-          }
-
+      alert("le like marche bien ");
+    }
+    if (fetchLike.status === 400) {
+      alert("vous aver deja liker ");
     }
   };
-//   const handleDislike = async (e) => {
-//     e.preventDefault();
-//   };
+  const handleDislike = async (e) => {
+    e.preventDefault();
+
+    const fetchLike = await fetch(` http://localhost:3000/api/dislike/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify({ userId: userId }),
+    });
+
+    if (fetchLike.status === 200) {
+      alert("le dislike marche bien ");
+    }
+    if (fetchLike.status === 400) {
+      alert("vous aver deja disliker ");
+    }
+  };
 
   return (
     <div className="likeContiner">
@@ -50,14 +52,9 @@ console.log("le userid est ",userId)
         <AiFillLike color="green" />
         <p> {countlike} </p>
       </button>
-      <button className="like" 
-      
-    //   onClick={handleDislike}
-      
-      
-      >
+      <button className="like" onClick={handleDislike}>
         <AiFillDislike color="red" />
-        {/* <p> {countDislike} </p> */}
+        <p> {countDislike} </p>
       </button>
     </div>
   );

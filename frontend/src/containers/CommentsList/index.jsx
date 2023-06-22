@@ -10,7 +10,7 @@ import { FcExpand } from "react-icons/fc";
 import { FcCollapse } from "react-icons/fc";
 
 import Like from "../../components/like"
-function CommentsList({ idCommentList }) {
+function CommentsList({ idCommentList ,countlike,countDislike}) {
   const infos = useSelector(login);
 
   const id = infos?.payload.user?.user?.user._id;
@@ -83,7 +83,9 @@ function CommentsList({ idCommentList }) {
   return (
     <div className="commentList">
       <div className="comment-stats">
-      <Like userId={id}   id={idCommentList } />
+     
+      <Like userId={id}   id={idCommentList }    countlike={countlike} countDislike={countDislike}/>
+    
       {/* le nombre des commentaires  */}
       <CommentsNumber number={commentsOfNumber} />
       {/* la condition si il ya des commontaire afiche le button de collapse sinon ne l'affiche pas  */}

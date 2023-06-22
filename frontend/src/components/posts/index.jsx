@@ -13,6 +13,8 @@ function Posts({
   sameUser,
   descriptionPost,
   idPost,
+  countlike,
+  countDislike,
 }) {
   const cover = "../images/user.png";
 
@@ -51,7 +53,7 @@ function Posts({
         </div>
       </section>
 
-      <CommentsList idCommentList={idPost} />
+      <CommentsList idCommentList={idPost} countlike={countlike} countDislike={countDislike}/>
     </div>
   );
 }
