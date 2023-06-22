@@ -6,13 +6,18 @@ exports.like = async (req, res) => {
     const postId = req.params.id;
 
     const userId = req.body.userId;
-    console.log(postId), console.log(userId);
+
     // Vérifier si l'utilisateur a déjà aimé la publication
     const publication = await Publication.findById(postId);
     if (publication.likes.includes(userId)) {
       return res
         .status(400)
         .json({ erreur: "You have already liked this post." });
+    }
+    if (publication.dislikes.includes(userId)) {
+      return res.status(400).json({
+        erreur: "You have already indicated that you dislike this publication.",
+      });
     }
 
     // Ajouter l'ID de l'utilisateur dans le tableau des "likes"

@@ -13,7 +13,11 @@ exports.dislike = async (req, res) => {
         erreur: "You have already indicated that you dislike this publication.",
       });
     }
-
+    if (publication.likes.includes(userId)) {
+      return res
+        .status(400)
+        .json({ erreur: "You have already liked this post." });
+    }
     // Ajouter l'ID de l'utilisateur dans le tableau des "dislikes"
     publication.dislikes.push(userId);
     await publication.save();
