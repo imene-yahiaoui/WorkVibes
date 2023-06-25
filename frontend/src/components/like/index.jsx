@@ -19,10 +19,10 @@ function Like({ userId, id, countlike, countDislike }) {
     });
 
     if (fetchLike.status === 200) {
-      alert("le like marche bien ");
+      //Si je souhaite afficher quelque chose lorsque le code est exécuté
     }
     if (fetchLike.status === 400) {
-      alert("vous aver deja liker ");
+      // Si he souhaite  afficher quelque chose lorsque le code n'est  pas exécuté
     }
   };
   const handleDislike = async (e) => {
@@ -39,10 +39,10 @@ function Like({ userId, id, countlike, countDislike }) {
     });
 
     if (fetchLike.status === 200) {
-      alert("le dislike marche bien ");
+      //Si je souhaite afficher quelque chose lorsque le code est exécuté
     }
     if (fetchLike.status === 400) {
-      alert("vous aver deja disliker ");
+      // Si he souhaite  afficher quelque chose lorsque le code n'est  pas exécuté
     }
   };
 
