@@ -8,11 +8,9 @@ function AllPosts() {
   const infos = useSelector(login);
 
   const id = infos?.payload.user?.user?.user._id;
- 
+
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
-
-
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -29,39 +27,36 @@ function AllPosts() {
         if (requete.ok) {
           const response = await requete.json();
           setPosts(response.reverse()); // Met à jour les posts
-
-          // Récupère les informations de l'utilisateur pour chaque post
-          for (const post of response) {
-            const userId = post.userId;
-
-            if (!users[userId]) {
-              const userResponse = await fetch(
-                `http://localhost:3000/api/auth/${userId}`,
-                {
-                  method: "GET",
-                }
-              );
-
-              if (userResponse.ok) {
-                const user = await userResponse.json();
-                setUsers((prevUsers) => ({ ...prevUsers, [userId]: user })); // Met à jour les informations utilisateur
-              }
-            }
-          }
         }
       } catch (error) {
         console.log(error);
       }
     };
 
+    const fetchUsers = async () => {
+      const userIds = Array.from(new Set(posts.map((post) => post.userId)));
+
+      const fetchUser = async (userId) => {
+        const userResponse = await fetch(
+          `http://localhost:3000/api/auth/${userId}`,
+          {
+            method: "GET",
+          }
+        );
+
+        if (userResponse.ok) {
+          const user = await userResponse.json();
+          return [userId, user];
+        }
+      };
+
+      const users = await Promise.all(userIds.map(fetchUser));
+      setUsers(Object.fromEntries(users));
+    };
+
     fetchPosts();
-  }, [users, posts]);
-
-
-
-
-  
-
+    fetchUsers();
+  }, [posts]);
 
   return (
     <div className="home">
@@ -79,9 +74,7 @@ function AllPosts() {
           countlike={post.likes.length}
           countDislike={post.dislikes.length}
         />
-    
       ))}
-
     </div>
   );
 }

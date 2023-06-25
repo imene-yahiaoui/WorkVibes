@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 import CommentsNumber from "../../components/commentsNumber";
 import { Collapse } from "react-collapse";
 import Comment from "../../components/comment";
-import { FcExpand } from "react-icons/fc";
-import { FcCollapse } from "react-icons/fc";
+import { FcExpand, FcCollapse } from "react-icons/fc";
 
-import Like from "../../components/like"
-function CommentsList({ idCommentList ,countlike,countDislike}) {
+import Like from "../../components/like";
+
+function CommentsList({ idCommentList, countlike, countDislike }) {
   const infos = useSelector(login);
-
   const id = infos?.payload.user?.user?.user._id;
 
   const [posts, setPosts] = useState([]);
@@ -25,7 +24,7 @@ function CommentsList({ idCommentList ,countlike,countDislike}) {
 
     const fetchPosts = async () => {
       try {
-        const requete = await fetch(` http://localhost:3000/api/comment`, {
+        const requete = await fetch(`http://localhost:3000/api/comment`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,52 +73,56 @@ function CommentsList({ idCommentList ,countlike,countDislike}) {
   const filteredComments = posts.filter(
     (post) => post.postId === idCommentList
   );
-  //pour  ouvrire ou fermer les collapse de comments
+
+  // Pour ouvrir ou fermer les collapsibles des commentaires
   const handleCollapseToggle = () => {
     setIsCollapseOpen(!isCollapseOpen);
   };
 
-  // filtre  id for post === id for post id in comment fetch
   return (
     <div className="commentList">
       <div className="comment-stats">
-     
-      <Like userId={id}   id={idCommentList }    countlike={countlike} countDislike={countDislike}/>
-    
-      {/* le nombre des commentaires  */}
-      <CommentsNumber number={commentsOfNumber} />
-      {/* la condition si il ya des commontaire afiche le button de collapse sinon ne l'affiche pas  */}
-    
+        <Like
+          userId={id}
+          id={idCommentList}
+          countlike={countlike}
+          countDislike={countDislike}
+        />
+
+        {/* Le nombre de commentaires */}
+        <CommentsNumber number={commentsOfNumber} />
       </div>
+
       {commentsOfNumber ? (
-        <button className="CollapseToggle" onClick={handleCollapseToggle}>
-          {isCollapseOpen?
-        <FcCollapse  font-size="30px"  />
-          :
-         
-          <FcExpand font-size="30px" />
-}
-          <Collapse  isOpened={isCollapseOpen}>
+        <div>
+          <button className="CollapseToggle" onClick={handleCollapseToggle}>
+            {isCollapseOpen ? (
+              <FcCollapse fontSize="30px" />
+            ) : (
+              <FcExpand fontSize="30px" />
+            )}
+          </button>
+
+          <Collapse isOpened={isCollapseOpen}>
             <div className="Collapse">
-            {filteredComments.map((post) => (
-              <CommentSection
-                key={post._id}
-                imageUser={users[post.userId]?.imageUrl}
-                firstname={users[post.userId]?.firstname}
-                lastname={users[post.userId]?.lastname}
-                publicationDate={post.publicationDate}
-                commentPost={post.comment}
-                sameUser={id === post.userId ? "true" : ""}
-                idcomment={post._id}
-              />
-            ))}
+              {filteredComments.map((post) => (
+                <CommentSection
+                  key={post._id}
+                  imageUser={users[post.userId]?.imageUrl}
+                  firstname={users[post.userId]?.firstname}
+                  lastname={users[post.userId]?.lastname}
+                  publicationDate={post.publicationDate}
+                  commentPost={post.comment}
+                  sameUser={id === post.userId ? "true" : ""}
+                  idcomment={post._id}
+                />
+              ))}
             </div>
           </Collapse>
-        </button>
-      ) : (
-        ""
-      )}
-      {/* ajoute un commentaire */}
+        </div>
+      ) : null}
+
+      {/* Ajouter un commentaire */}
       <Comment idComment={idCommentList} />
     </div>
   );

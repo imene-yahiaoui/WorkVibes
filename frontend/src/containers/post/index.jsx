@@ -48,7 +48,6 @@ function Post() {
     });
 
     if (result.status === 201) {
-      alert("The changes have been successfully saved");
       setDescription("");
       deleteImg();
     }

@@ -13,7 +13,7 @@ function Header() {
       <ul className="nav_icon">
         <li className="icon">
           <HiOutlineGlobeAlt />
-          <h1> Groupmania </h1>
+          <h1> WorkVibes </h1>
         </li>
       </ul>
       <ul className="nav-elements">

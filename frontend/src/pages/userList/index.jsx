@@ -15,7 +15,7 @@ function UserList() {
         if (requete.ok) {
           const response = await requete.json();
           setUsers(response);
-          console.log("icciiiiiiiii", response);
+       
         }
       } catch (e) {
         console.log(e);
