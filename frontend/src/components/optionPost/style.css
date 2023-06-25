@@ -1,8 +1,19 @@
 .postEdit {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  
-    justify-content: space-between;
-    padding: 0 50px;
-  }
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  justify-content: space-between;
+  padding: 0 50px;
+}
+.postSave {
+  display: flex;
+  align-items: center;
+  column-gap: 2px;
+  padding-bottom: 20px;
+}
+.postSave button{
+background-color: transparent;
+border-radius: 10px;
+border:2px solid #3C84AB;
+}

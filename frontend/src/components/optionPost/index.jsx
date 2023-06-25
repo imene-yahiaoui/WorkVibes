@@ -65,7 +65,7 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
     //si le meme user et je clicke sur edit mode
     <div className="postEdit">
       {sameUser && editMode ? (
-        <form onSubmit={saveDescription}>
+        <form className="postSave" onSubmit={saveDescription}>
           <input
             type="text"
             className="post_inputText"

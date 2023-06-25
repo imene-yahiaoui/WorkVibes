@@ -70,9 +70,9 @@ function OptionComment({ commentPost, sameUser, idPost, idcomment }) {
 
   return (
     //si le meme user et je clicke sur edit mode
-    <div className="postEdit cmmentEdit">
+    <div className="postEdit commentEdit">
       {sameUser && editMode ? (
-        <form onSubmit={saveDescription}>
+        <form className="postSave" onSubmit={saveDescription}>
           <input
             type="text"
             className="post_inputText"
