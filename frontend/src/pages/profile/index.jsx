@@ -67,11 +67,14 @@ function Profile() {
             </div>
             <div className="account_info">
               {user.job === "undefined" ? "" : <p>{user.job}</p>}
-              <label>Bio : </label>
+
               {user.bio === "undefined" ? (
                 ""
               ) : (
-                <p className="account_info_p"> {user.bio}</p>
+                <div>
+                  <label>Bio: </label>
+                  <p className="account_info_p">{user.bio}</p>
+                </div>
               )}
             </div>
           </div>

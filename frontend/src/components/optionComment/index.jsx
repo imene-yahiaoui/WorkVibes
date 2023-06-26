@@ -32,7 +32,7 @@ function OptionComment({ commentPost, sameUser, idPost, idcomment }) {
     );
 
     if (request.status === 200) {
-      alert("Post deleted successfully. ");
+     //ce que je veux affichier 
     }
   };
   //le mode edit

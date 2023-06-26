@@ -9,7 +9,7 @@
   flex-direction: column;
   padding: 20px;
 }
- 
+
 .post_continer {
   display: flex;
   flex-direction: row;
@@ -70,7 +70,7 @@
   position: absolute;
   font-size: 30px;
   color: red;
-  left: 451px;
+  left: 577px;
   border: none;
   background: transparent;
   top: -24px;
@@ -82,17 +82,15 @@
   letter-spacing: 2px;
   background-color: transparent;
   padding: 6px 20px;
- 
 }
-.addPicture{
-cursor: pointer;
-
+.addPicture {
+  cursor: pointer;
 }
-.addPicture:hover{
-  box-shadow:5px 10px 18px #ecb6be;
+.addPicture:hover {
+  box-shadow: 5px 10px 18px #ecb6be;
   /* border: 2px solid #ecb6be; */
 }
-.postit:hover{
-  box-shadow:5px 10px 18px #ecb6be;
+.postit:hover {
+  box-shadow: 5px 10px 18px #ecb6be;
   border: 2px solid #ecb6be;
 }

@@ -1,7 +1,7 @@
 import Log from "../../components/log";
 import Signup from "../../components/signup";
 import "./style.css";
-// import Company from "../../images/team.jpg";
+
 import { useState } from "react";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
   return (
     <div className="Login">
       <figure className="Login_continer">
-        {/* <img src={Company} alt="company" /> */}
+      
         {login ? (
           <figcaption className="Login_auth">
             <div className="loginTitle">
