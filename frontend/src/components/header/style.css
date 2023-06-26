@@ -1,7 +1,7 @@
 .header {
   width: 100%;
   height: 80px;
-  background-color:#F8E8EE;
+  background-color: #f9eaeb;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -11,7 +11,7 @@
   flex-direction: row;
   align-items: center;
   column-gap: 19px;
-  color:  #3C84AB;
+  color: #3c84ab;
   font-size: 30px;
 }
 .nav_icon {
@@ -25,20 +25,41 @@
   font-size: 19px;
   list-style: none;
   column-gap: 120px;
-  color:  white;
+  color: white;
   font-size: 30px;
 }
 
 .nav-elements :hover {
-  color:#3C84AB;
+  color: #3c84ab;
 }
 a {
   text-decoration: none;
-  color:  white;
+  color: white;
 }
 a:visited {
-  color:  white;
+  color: white;
 }
 a:hover {
- color: #3C84AB;
+  color: #3c84ab;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  color: #f0cccf;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

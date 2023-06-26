@@ -1,9 +1,9 @@
 import "./style.css";
-import { FcGallery } from "react-icons/fc";
 import { useState } from "react";
 import { login } from "../../helpers/features/userSlice.js";
 import { useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
+import { AiFillPicture } from "react-icons/ai";
 
 function Post() {
   const [imageUrl, setImageUrl] = useState("");
@@ -87,7 +87,7 @@ function Post() {
 
         <div className="post_btn">
           <div className="post_icon-container">
-            <FcGallery />
+            <AiFillPicture style={{ color: "#f0cccf", borderRadius: "10px" }} />
             <input
               className="post_input"
               type="file"

@@ -12,7 +12,7 @@ function Header() {
     <div className="header">
       <ul className="nav_icon">
         <li className="icon">
-          <HiOutlineGlobeAlt />
+          <HiOutlineGlobeAlt className=" App-logo" />
           <h1> WorkVibes </h1>
         </li>
       </ul>
