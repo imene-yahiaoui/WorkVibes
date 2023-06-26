@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { LuSend } from "react-icons/lu";
 import { login } from "../../helpers/features/userSlice.js";
+
 import "./style.css";
+
 function Comment({ idComment }) {
   const [comment, setComment] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const infos = useSelector(login);
   const imageUser = infos?.payload.user?.user?.user.imageUrl;
 
