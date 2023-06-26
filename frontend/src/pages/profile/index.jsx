@@ -89,10 +89,10 @@ function Profile() {
             publicationDate={post.publicationDate}
             imageUrl={post.imageUrl}
             descriptionPost={post.description}
-       sameUser={id === post.userId ? "true" : ""}
-       idPost={post._id}
-       countlike={post.likes.length}
-       countDislike={post.dislikes.length}
+            sameUser={id === post.userId ? "true" : ""}
+            idPost={post._id}
+            countlike={post.likes.length}
+            countDislike={post.dislikes.length}
           />
         ))}
     </div>

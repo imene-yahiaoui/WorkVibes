@@ -2,7 +2,7 @@ import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { FcGallery } from "react-icons/fc";
+import { AiFillPicture } from "react-icons/ai";
 
 function ProfileImage() {
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ function ProfileImage() {
         <label htmlFor="imageUrl">Change your image</label>
         <div className="updatePicture">
           <div className="icon-container">
-            <FcGallery />
+            <AiFillPicture style={{ color: "#f0cccf", borderRadius: "10px" }} />
           </div>
           <input
             className="input"

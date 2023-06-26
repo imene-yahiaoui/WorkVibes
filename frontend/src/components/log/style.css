@@ -27,7 +27,7 @@
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
-  background:  rgb(240, 238, 235);
+  background: #e3c5c8;
   border-radius: 5px;
 }
 
@@ -38,8 +38,8 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color:   rgb(240, 238, 235);
-  background-color: brown;
+  border-color:  #dda8b3;
+  background-color: #dda8b3;
   color: #fff;
   border-radius: 5px;
 }

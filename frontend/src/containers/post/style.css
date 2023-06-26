@@ -82,4 +82,17 @@
   letter-spacing: 2px;
   background-color: transparent;
   padding: 6px 20px;
+ 
+}
+.addPicture{
+cursor: pointer;
+
+}
+.addPicture:hover{
+  box-shadow:5px 10px 18px #ecb6be;
+  /* border: 2px solid #ecb6be; */
+}
+.postit:hover{
+  box-shadow:5px 10px 18px #ecb6be;
+  border: 2px solid #ecb6be;
 }

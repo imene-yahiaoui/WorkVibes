@@ -35,3 +35,6 @@
   flex-direction: column;
   justify-content: center;
 }
+.editBtn {
+  background-color: #dda8b3;
+}

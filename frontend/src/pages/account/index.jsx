@@ -5,6 +5,7 @@ import { useState } from "react";
 import ProfileImage from "../../containers/profileImage";
 import { useDispatch } from "react-redux";
 import DeletUser from "../../containers/deletUser";
+
 function Account() {
   const dispatch = useDispatch();
 
@@ -119,10 +120,10 @@ function Account() {
 
             <button
               type="submit"
-              className="sign-in-button"
+              className="sign-in-button editBtn"
               onClick={updateUser}
             >
-              modifier
+              Edit
             </button>
           </div>
         </form>

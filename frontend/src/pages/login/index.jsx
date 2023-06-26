@@ -1,8 +1,9 @@
 import Log from "../../components/log";
 import Signup from "../../components/signup";
 import "./style.css";
-import Company from "../../images/team.jpg";
+// import Company from "../../images/team.jpg";
 import { useState } from "react";
+import { HiOutlineGlobeAlt } from "react-icons/hi";
 function Login() {
   const [login, setLogin] = useState(true);
   const toggleLogin = () => {
@@ -11,10 +12,13 @@ function Login() {
   return (
     <div className="Login">
       <figure className="Login_continer">
-        <img src={Company} alt="company" />
+        {/* <img src={Company} alt="company" /> */}
         {login ? (
           <figcaption className="Login_auth">
-            <h2> Log in </h2>
+            <div className="loginTitle">
+              <HiOutlineGlobeAlt className=" App-logo logo" />
+              <h2> Log in </h2>
+            </div>
             <Log />
             <div className="login_signup">
               <p>No account yet? </p>
@@ -23,7 +27,11 @@ function Login() {
           </figcaption>
         ) : (
           <figcaption className="Login_auth">
-            <h2> Sign up </h2>
+            <div className="loginTitle">
+              <HiOutlineGlobeAlt className=" App-logo logo" />
+              <h2> Sign up </h2>
+            </div>
+
             <Signup />
             <div className="login_signup">
               <p>Already have an account? </p>

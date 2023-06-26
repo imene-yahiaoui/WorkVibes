@@ -1,7 +1,7 @@
 .input-names {
   display: flex;
   flex-direction: row;
-
+ 
   margin-bottom: 40px;
   grid-gap: 17px;
 }
@@ -9,7 +9,7 @@
 .input-name input {
   padding: 5px;
   font-size: 1.1rem;
-  background: rgb(240, 238, 235);
+  background: #e3c5c8;
   border-radius: 5px;
   width:80%;
 }

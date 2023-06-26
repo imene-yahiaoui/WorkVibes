@@ -2,8 +2,9 @@
   width: 220px;
   height: 221px;
   object-fit: contain;
-  border: 1px solid #FDCEDF;
+  border: 1px solid #fdcedf;
   border-radius: 124px;
+  object-fit: cover;
 }
 
 .Profile_input {

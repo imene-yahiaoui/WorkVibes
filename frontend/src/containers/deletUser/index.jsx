@@ -40,7 +40,7 @@ function DeletUser() {
   return (
     <div className="account_delete">
       <h6>Delete your account </h6>
-      <button type="submit" className="sign-in-button" onClick={delet}>
+      <button type="submit" className="sign-in-button editBtn" onClick={delet}>
         Delete
       </button>
       <Modal show={show} onHide={handleClose}>

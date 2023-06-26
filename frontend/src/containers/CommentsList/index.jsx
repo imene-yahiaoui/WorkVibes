@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import CommentsNumber from "../../components/commentsNumber";
 import { Collapse } from "react-collapse";
 import Comment from "../../components/comment";
-import { FcExpand, FcCollapse } from "react-icons/fc";
-
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Like from "../../components/like";
 
 function CommentsList({ idCommentList, countlike, countDislike }) {
@@ -97,9 +96,9 @@ function CommentsList({ idCommentList, countlike, countDislike }) {
         <div>
           <button className="CollapseToggle" onClick={handleCollapseToggle}>
             {isCollapseOpen ? (
-              <FcCollapse fontSize="30px" />
+              <FiChevronUp style={{ color: "#dda8b3", fontSize: "35px" }} />
             ) : (
-              <FcExpand fontSize="30px" />
+              <FiChevronDown style={{ color: "#dda8b3", fontSize: "35px" }} />
             )}
           </button>
 

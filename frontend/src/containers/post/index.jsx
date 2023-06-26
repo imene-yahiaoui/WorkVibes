@@ -86,8 +86,8 @@ function Post() {
         </div>
 
         <div className="post_btn">
-          <div className="post_icon-container">
-            <AiFillPicture style={{ color: "#f0cccf", borderRadius: "10px" }} />
+          <div className="post_icon-container ">
+            <AiFillPicture className="addPicture" style={{ color: "#f0cccf", borderRadius: "10px" }} />
             <input
               className="post_input"
               type="file"
