@@ -1,7 +1,7 @@
 WorkVibes
 🚀 Installation
 
-Frontend
+**Frontend**
 
 
 Suivez les étapes ci-dessous pour installer et exécuter le projet :
@@ -19,7 +19,7 @@ Ouvrez votre navigateur et accédez à http://localhost:3000 pour voir le portfo
 Maintenant, vous pouvez explorer mon portfolio sur votre propre machine ! ✨
 
 
-Backend
+**Backend**
 
 npm install
 
