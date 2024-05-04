@@ -1,42 +1,31 @@
 import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import ProfileImage from "../../containers/profileImage";
-import { useDispatch } from "react-redux";
 import DeletUser from "../../containers/deletUser";
 
 function Account() {
   const dispatch = useDispatch();
-
   const infos = useSelector(login);
+  const user = infos?.payload?.user?.user?.user;
+  const [firstName, setFirstName] = useState(user?.firstname || "");
+  const [lastName, setLastName] = useState(user?.lastname || "");
+  const [job, setJob] = useState(user?.job || "");
+  const [bio, setBio] = useState(user?.bio || "");
+  const id = user?._id || null;
 
-  const email = infos?.payload.user?.user?.user.email;
-  const password = infos?.payload.user?.user?.user.password;
-  const firstNameValue = infos?.payload.user?.user?.user.firstname;
-  const [firstName, setFirstName] = useState(firstNameValue);
-  const lastNameValue = infos?.payload.user?.user?.user.lastname;
-  const [lastName, setLastName] = useState(lastNameValue);
-  const JobValue = infos?.payload.user?.user?.user.job;
-
-  const [job, setJob] = useState(JobValue);
-  const bioValue = infos?.payload.user?.user?.user.bio;
-  const [bio, setBio] = useState(bioValue);
-  const id = infos?.payload.user?.user?.user._id;
   async function updateUser(e) {
     e.preventDefault();
-
-    // Créer un objet FormData
+    
     const formData = new FormData();
-
-    // Ajouter les autres champs du formulaire à l'objet FormData
-
     formData.append("firstname", firstName);
     formData.append("lastname", lastName);
     formData.append("job", job);
     formData.append("bio", bio);
-    formData.append("password", password);
-    formData.append("email", email);
+    formData.append("password", user.password);
+    formData.append("email", user.email);
+
     let token = localStorage.getItem("token");
     let result = await fetch(`http://localhost:3000/api/auth/${id}`, {
       method: "PUT",
@@ -48,28 +37,28 @@ function Account() {
 
     if (result.status === 200) {
       alert("The changes have been successfully saved");
-
-      const fetchData = async () => {
-        try {
-          const requete = await fetch(`http://localhost:3000/api/auth/${id}`, {
-            method: "GET",
-          });
-          if (requete.ok) {
-            const response = await requete.json();
-
-            dispatch(
-              login({
-                user: response,
-              })
-            );
-          }
-        } catch (e) {
-          console.log(e, "error");
-        }
-      };
       fetchData();
     }
   }
+
+  const fetchData = async () => {
+    try {
+      let token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:3000/api/auth/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(login({ user: data }));
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
   return (
     <div className="account">

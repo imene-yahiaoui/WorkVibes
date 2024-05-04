@@ -7,9 +7,9 @@ import "./style.css";
 
 function Comment({ idComment }) {
   const [comment, setComment] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const infos = useSelector(login);
-  const imageUser = infos?.payload.user?.user?.user.imageUrl;
+  const imageUser = infos?.payload.user?.user?.user?.imageUrl;
 
   const token = localStorage.getItem("token");
 

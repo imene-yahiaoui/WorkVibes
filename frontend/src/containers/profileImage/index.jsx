@@ -8,7 +8,7 @@ function ProfileImage() {
   const dispatch = useDispatch();
   const infos = useSelector(login);
 
-  const id = infos?.payload.user?.user?.user._id;
+  const id = infos?.payload.user?.user?.user._id | null;
   const email = infos?.payload.user?.user?.user.email;
 
   const password = infos?.payload.user?.user?.user.password;

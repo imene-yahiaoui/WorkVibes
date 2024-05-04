@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 function AllPosts() {
   const infos = useSelector(login);
 
-  const id = infos?.payload.user?.user?.user._id;
+  const id = infos?.payload.user?.user?.user._id |null;
 
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});

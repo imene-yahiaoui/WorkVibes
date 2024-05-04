@@ -15,7 +15,7 @@ function DeletUser() {
 
   const handleClose = () => setShow(false);
   const infos = useSelector(login);
-  const id = infos?.payload.user?.user?.user._id;
+  const id = infos?.payload.user?.user?.user._id |null;
   let token = localStorage.getItem("token");
   function delet() {
     setShow(true);

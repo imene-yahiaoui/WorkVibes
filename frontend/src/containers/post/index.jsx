@@ -11,7 +11,7 @@ function Post() {
   const [files, setFiles] = useState("");
   const infos = useSelector(login);
   console.log(infos);
-  const imageUser = infos?.payload.user?.user?.user.imageUrl;
+  const imageUser = infos?.payload.user?.user?.user.imageUrl | null;
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -87,7 +87,10 @@ function Post() {
 
         <div className="post_btn">
           <div className="post_icon-container ">
-            <AiFillPicture className="addPicture" style={{ color: "#f0cccf", borderRadius: "10px" }} />
+            <AiFillPicture
+              className="addPicture"
+              style={{ color: "#f0cccf", borderRadius: "10px" }}
+            />
             <input
               className="post_input"
               type="file"

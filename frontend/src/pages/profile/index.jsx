@@ -10,7 +10,7 @@ function Profile() {
   const { _id } = useParams();
   const infos = useSelector(login);
 
-  const id = infos?.payload.user?.user?.user._id;
+  const id = infos?.payload.user?.user?.user._id|null;
   const fetchProjects = async () => {
     let requete = await fetch(`http://localhost:3000/api/auth/${_id}`, {
       method: "GET",

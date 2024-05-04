@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb+srv://ImeneYahiaoui:19921983@clusters.enxcmzl.mongodb.net/Groupomania?retryWrites=true&w=majority",
+    "mongodb+srv://ImeneYahiaoui:19921983@clusters.enxcmzl.mongodb.net/",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
