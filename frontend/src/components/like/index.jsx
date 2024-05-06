@@ -6,8 +6,8 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
   const [likList, setLikList] = useState(false);
   const [dislikList, setDislikList] = useState(false);
   const [usersLikes, setUsersLikes] = useState([]);
-  const [usersDisLikes,  setUsersDislikes] = useState([]);
- 
+  const [usersDisLikes, setUsersDislikes] = useState([]);
+
   const token = localStorage.getItem("token");
 
   const handleAction = async (actionType) => {
@@ -45,7 +45,7 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
       for (let i = 0; i < likeUser.length; i++) {
         data.forEach((user) => {
           if (user._id === likeUser[i]) {
-                    matchedUsers.push(user);
+            matchedUsers.push(user);
           }
         });
       }
@@ -67,7 +67,7 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
       for (let i = 0; i < dislikeUser.length; i++) {
         data.forEach((user) => {
           if (user._id === dislikeUser[i]) {
-            matchedUsers.push(user);;
+            matchedUsers.push(user);
           }
         });
       }
@@ -92,12 +92,17 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
         </button>
       </section>
 
-      <section className="listUser" style={{ display: usersLikes.length !==0 && likList ? "flex" : "none" }}>
+      <section
+        className="listUser"
+        style={{
+          display: usersLikes.length !== 0 && likList ? "flex" : "none",
+        }}
+      >
         {usersLikes.map((user) => {
           return (
             <li key={user._id}>
-              {user.imageUser ? (
-                <img className="photoUser" alt="profile" src={user.imageUser} />
+              {user.imageUrl ? (
+                <img className="photoUser" alt="profile" src={user.imageUrl} />
               ) : (
                 <img className="photoUser" src={cover} alt="user" />
               )}
@@ -106,12 +111,17 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
           );
         })}
       </section>
-      <section className="listUser" style={{ display: usersDisLikes.length !==0 &&dislikList ? "flex" : "none" }}>
+      <section
+        className="listUser"
+        style={{
+          display: usersDisLikes.length !== 0 && dislikList ? "flex" : "none",
+        }}
+      >
         {usersDisLikes.map((user) => {
           return (
             <li key={user._id}>
-              {user.imageUser ? (
-                <img className="photoUser" alt="profile" src={user.imageUser} />
+              {user.imageUrl ? (
+                <img className="photoUser" alt="profile" src={user.imageUrl} />
               ) : (
                 <img className="photoUser" src={cover} alt="user" />
               )}
@@ -120,8 +130,6 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
           );
         })}
       </section>
-
-      
     </div>
   );
 }

@@ -2,13 +2,13 @@ import { login } from "../../helpers/features/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { AiFillPicture } from "react-icons/ai";
-
+import "./style.css";
 function ProfileImage() {
   const dispatch = useDispatch();
   const infos = useSelector(login);
 
   // Destructure user data from redux state
-  const { user } = infos.payload;
+  const { user } = infos?.payload?.user?.user;
 
   // Destructure user properties
   const {
@@ -21,7 +21,6 @@ function ProfileImage() {
     bio,
     imageUrl: picture,
   } = user;
-console.log("le id de ce user est :",id)
   const cover = "../images/user.png";
 
   // Set initial imageUrl state based on picture availability
