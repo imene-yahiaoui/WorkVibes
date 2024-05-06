@@ -12,8 +12,21 @@
 .likeContiner {
   column-gap: 20px;
 }
-.like{
-background-color:transparent;
-border: none;
+.like {
+  background-color: transparent;
+  border: none;
+}
+.liks-with-list {
+  display: flex;
+  flex-direction: column;
+}
 
+.listUser {
+  list-style-type: none;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  column-gap: 10px;
+  flex-wrap: wrap;
 }

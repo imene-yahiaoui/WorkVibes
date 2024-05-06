@@ -85,6 +85,8 @@ function AllPosts() {
           idPost={post._id}
           countlike={post.likes.length}
           countDislike={post.dislikes.length}
+          likeUser={post.likes}
+          dislikeUser={post.dislikes}
         />
       ))}
     </div>

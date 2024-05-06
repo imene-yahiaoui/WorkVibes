@@ -1,8 +1,13 @@
 import React from "react";
 import "./style.css";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-
-function Like({ userId, id, countlike, countDislike }) {
+import { useState } from "react";
+function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
+  const [likList, setLikList] = useState(false);
+  const [dislikList, setDislikList] = useState(false);
+  const [usersLikes, setUsersLikes] = useState([]);
+  const [usersDisLikes,  setUsersDislikes] = useState([]);
+ 
   const token = localStorage.getItem("token");
 
   const handleAction = async (actionType) => {
@@ -20,22 +25,103 @@ function Like({ userId, id, countlike, countDislike }) {
     );
 
     if (fetchAction.ok) {
-      // Handle successful action
+      alert("le like marche bien ");
     } else {
-      // Handle failed action
+      alert("vous aver deja liker ");
+    }
+  };
+  const likeUserList = async () => {
+    setLikList(!likList);
+
+    const fetchAllUsers = await fetch(`http://localhost:3000/api/auth/users`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (fetchAllUsers.ok) {
+      const data = await fetchAllUsers.json();
+      const matchedUsers = [];
+      for (let i = 0; i < likeUser.length; i++) {
+        data.forEach((user) => {
+          if (user._id === likeUser[i]) {
+                    matchedUsers.push(user);
+          }
+        });
+      }
+      setUsersLikes(matchedUsers);
     }
   };
 
+  const dislikeUserList = async () => {
+    setDislikList(!dislikList);
+    const fetchAllUsers = await fetch(`http://localhost:3000/api/auth/users`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (fetchAllUsers.ok) {
+      const data = await fetchAllUsers.json();
+      const matchedUsers = [];
+      for (let i = 0; i < dislikeUser.length; i++) {
+        data.forEach((user) => {
+          if (user._id === dislikeUser[i]) {
+            matchedUsers.push(user);;
+          }
+        });
+      }
+      setUsersDislikes(matchedUsers);
+    }
+  };
+  const cover = "../../images/user.png";
   return (
-    <div className="likeContiner">
-      <button className="like" onClick={() => handleAction("like")}>
-        <AiFillLike color="green" />
-        <p> {countlike} </p>
-      </button>
-      <button className="like" onClick={() => handleAction("dislike")}>
-        <AiFillDislike color="red" />
-        <p> {countDislike} </p>
-      </button>
+    <div className="liks-with-list">
+      <section className="likeContiner">
+        <button className="like" onClick={() => handleAction("like")}>
+          <AiFillLike color="green" />
+        </button>
+        <button className="like" onClick={likeUserList}>
+          <p> {countlike} </p>
+        </button>
+        <button className="like" onClick={() => handleAction("dislike")}>
+          <AiFillDislike color="red" />
+        </button>
+        <button className="like" onClick={dislikeUserList}>
+          <p> {countDislike} </p>
+        </button>
+      </section>
+
+      <section className="listUser" style={{ display: usersLikes.length !==0 && likList ? "flex" : "none" }}>
+        {usersLikes.map((user) => {
+          return (
+            <li key={user._id}>
+              {user.imageUser ? (
+                <img className="photoUser" alt="profile" src={user.imageUser} />
+              ) : (
+                <img className="photoUser" src={cover} alt="user" />
+              )}
+              <p>{user.firstname}</p>
+            </li>
+          );
+        })}
+      </section>
+      <section className="listUser" style={{ display: usersDisLikes.length !==0 &&dislikList ? "flex" : "none" }}>
+        {usersDisLikes.map((user) => {
+          return (
+            <li key={user._id}>
+              {user.imageUser ? (
+                <img className="photoUser" alt="profile" src={user.imageUser} />
+              ) : (
+                <img className="photoUser" src={cover} alt="user" />
+              )}
+              <p>{user.firstname}</p>
+            </li>
+          );
+        })}
+      </section>
+
+      
     </div>
   );
 }

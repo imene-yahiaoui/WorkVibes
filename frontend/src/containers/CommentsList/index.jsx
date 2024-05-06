@@ -9,7 +9,7 @@ import Comment from "../../components/comment";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Like from "../../components/like";
 
-function CommentsList({ idCommentList, countlike, countDislike }) {
+function CommentsList({ idCommentList, countlike, countDislike,likeUser,dislikeUser }) {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
   const [commentsOfNumber, setCommentsOfNumber] = useState(0);
@@ -79,6 +79,8 @@ function CommentsList({ idCommentList, countlike, countDislike }) {
           id={idCommentList}
           countlike={countlike}
           countDislike={countDislike}
+         likeUser={likeUser}
+         dislikeUser={dislikeUser}
         />
         <CommentsNumber number={commentsOfNumber} />
       </div>
