@@ -1,4 +1,7 @@
-WorkVibes
+**Bienvenue sur WorkVibes!** 🎉
+
+
+WorkVibes est un réseau social destiné à favoriser la collaboration et la connexion entre les membres d'une société. Il est développé en utilisant React et Node.js avec Express, ainsi que d'autres bibliothèques pour améliorer les fonctionnalités et l'expérience utilisateur.
 
 
 
