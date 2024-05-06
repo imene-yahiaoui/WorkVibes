@@ -6,30 +6,34 @@ import { useEffect, useState } from "react";
 
 function AllPosts() {
   const infos = useSelector(login);
-
-  const id = infos?.payload.user?.user?.user._id |null;
+  const id = infos?.payload?.user?.user?.user?._id || null;
 
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-
     const fetchPosts = async () => {
       try {
-        const requete = await fetch("http://localhost:3000/api/post", {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:3000/api/post", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (requete.ok) {
-          const response = await requete.json();
-          setPosts(response.reverse()); // Met à jour les posts
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
         }
+
+        const data = await response.json();
+        setPosts(data.reverse());
       } catch (error) {
-        console.log(error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -37,26 +41,34 @@ function AllPosts() {
       const userIds = Array.from(new Set(posts.map((post) => post.userId)));
 
       const fetchUser = async (userId) => {
-        const userResponse = await fetch(
-          `http://localhost:3000/api/auth/${userId}`,
-          {
-            method: "GET",
+        try {
+          const userResponse = await fetch(`http://localhost:3000/api/auth/${userId}`);
+          if (!userResponse.ok) {
+            throw new Error(`Failed to fetch user ${userId}`);
           }
-        );
-
-        if (userResponse.ok) {
           const user = await userResponse.json();
           return [userId, user];
+        } catch (error) {
+          console.error(error);
+          return [userId, null];
         }
       };
 
-      const users = await Promise.all(userIds.map(fetchUser));
-      setUsers(Object.fromEntries(users));
+      const usersData = await Promise.all(userIds.map(fetchUser));
+      setUsers(Object.fromEntries(usersData));
     };
 
     fetchPosts();
     fetchUsers();
   }, [posts]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="home">
@@ -69,7 +81,7 @@ function AllPosts() {
           publicationDate={post.publicationDate}
           imageUrl={post.imageUrl}
           descriptionPost={post.description}
-          sameUser={id === post.userId ? "true" : ""}
+          sameUser={id === post.userId}
           idPost={post._id}
           countlike={post.likes.length}
           countDislike={post.dislikes.length}
@@ -79,4 +91,4 @@ function AllPosts() {
   );
 }
 
-export default AllPosts;
+export default AllPosts

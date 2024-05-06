@@ -17,7 +17,6 @@ function Posts({
   countDislike,
 }) {
   const cover = "../images/user.png";
-
   return (
     <div className="post postCadre">
       <section className="sectionPost">

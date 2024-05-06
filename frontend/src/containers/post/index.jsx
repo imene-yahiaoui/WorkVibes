@@ -8,10 +8,9 @@ import { AiFillPicture } from "react-icons/ai";
 function Post() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState(null);
   const infos = useSelector(login);
-  console.log(infos);
-  const imageUser = infos?.payload.user?.user?.user.imageUrl | null;
+  const imageUser = infos?.payload?.user?.user?.user?.imageUrl || null;
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -28,15 +27,16 @@ function Post() {
     e.preventDefault();
     const formData = new FormData();
 
-    // If there is an image in the post
-    if (imageUrl && files) {
+    if (description.trim() === "") {
+      alert("Please enter a description for your post.");
+      return;
+    }
+
+    if (files) {
       formData.append("imageUrl", files);
-      formData.append("description", description);
     }
-    // If there is no image in the post
-    else {
-      formData.append("description", description);
-    }
+
+    formData.append("description", description);
 
     const token = localStorage.getItem("token");
     const result = await fetch(`http://localhost:3000/api/post`, {
@@ -50,6 +50,9 @@ function Post() {
     if (result.status === 201) {
       setDescription("");
       deleteImg();
+    } else {
+      // Handle post creation failure
+      alert("Failed to create the post. Please try again later.");
     }
   };
 
@@ -71,6 +74,7 @@ function Post() {
               className="post_inputText"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="Write something..."
             />
           </figcaption>
         </figure>

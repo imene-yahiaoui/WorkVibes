@@ -10,45 +10,38 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
   const [description, setDescription] = useState(descriptionPost);
   const [editMode, setEditMode] = useState(false);
   const [show, setShow] = useState(false);
-  //pour cancel la supression
+
   const handleClose = () => setShow(false);
   const token = localStorage.getItem("token");
-  function delet() {
-    setShow(true);
-  }
-  //pour supremier le post
-  const deletePost = async (e) => {
-    e.preventDefault();
 
-    const request = await fetch(` http://localhost:3000/api/post/${idPost}`, {
+  const deletePost = async () => {
+    const request = await fetch(`http://localhost:3000/api/post/${idPost}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (request.status === 200) {
-      alert("Post deleted successfully. ");
+    if (request.ok) {
+      alert("Post deleted successfully.");
+    } else {
+      alert("Failed to delete post.");
     }
   };
-  //le mode edit
-  const toggleEditMode = (e) => {
-    e.preventDefault();
+  const toggleEditMode = () => {
     setEditMode(!editMode);
   };
 
-  //sauvgarder les modification de description
-  const saveDescription = async (e) => {
-    e.preventDefault();
+  const saveDescription = async () => {
     if (description.length === 0) {
       alert("Please enter a description.");
       return;
     }
-    //fetche put pour la description
+
     const formData = new FormData();
     formData.append("description", description);
 
-    const result = await fetch(` http://localhost:3000/api/post/${idPost}`, {
+    const result = await fetch(`http://localhost:3000/api/post/${idPost}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,13 +49,14 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
       body: formData,
     });
 
-    if (result.status === 200) {
+    if (result.ok) {
       setEditMode(false);
+    } else {
+      alert("Failed to save description.");
     }
   };
 
   return (
-    //si le meme user et je clicke sur edit mode
     <div className="postEdit">
       {sameUser && editMode ? (
         <form className="postSave" onSubmit={saveDescription}>
@@ -72,9 +66,7 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <button onClick={saveDescription} type="submit">
-            Save
-          </button>
+          <button type="submit">Save</button>
         </form>
       ) : (
         <p>{descriptionPost}</p>
@@ -90,7 +82,7 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
             <Dropdown.Item onClick={toggleEditMode}>
               <BsPencilFill /> Edit
             </Dropdown.Item>
-            <Dropdown.Item onClick={delet}>
+            <Dropdown.Item onClick={() => setShow(true)}>
               <BsFillTrash3Fill /> Delete
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -99,9 +91,7 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
           <Modal.Header closeButton>
             <Modal.Title>Delete</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            Are you sure you want to delete this account?{" "}
-          </Modal.Body>
+          <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Cancel

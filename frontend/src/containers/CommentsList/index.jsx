@@ -10,70 +10,63 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Like from "../../components/like";
 
 function CommentsList({ idCommentList, countlike, countDislike }) {
-  const infos = useSelector(login);
-  const id = infos?.payload.user?.user?.user._id | null;
-
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
   const [commentsOfNumber, setCommentsOfNumber] = useState(0);
   const [isCollapseOpen, setIsCollapseOpen] = useState(false);
+  const infos = useSelector(login);
+  const id = infos?.payload?.user?.user?.user?._id || null;
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-
-    const fetchPosts = async () => {
+    const fetchComments = async () => {
       try {
-        const requete = await fetch(`http://localhost:3000/api/comment`, {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:3000/api/comment", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (requete.ok) {
-          const response = await requete.json();
-
-          setPosts(response);
-          // Met à jour les posts
-
-          // Récupère les informations de l'utilisateur pour chaque post
-          for (const post of response) {
-            const userId = post.userId;
-
-            if (!users[userId]) {
-              const userResponse = await fetch(
-                `http://localhost:3000/api/auth/${userId}`,
-                {
-                  method: "GET",
-                }
-              );
-
-              if (userResponse.ok) {
-                const user = await userResponse.json();
-                setUsers((prevUsers) => ({ ...prevUsers, [userId]: user })); // Met à jour les informations utilisateur
-              }
-            }
-          }
+        if (!response.ok) {
+          throw new Error("Failed to fetch comments");
         }
+
+        const data = await response.json();
+        setPosts(data);
+
+        // Fetch user information for each comment
+        const userIds = Array.from(new Set(data.map((post) => post.userId)));
+        const fetchUser = async (userId) => {
+          const userResponse = await fetch(
+            `http://localhost:3000/api/auth/${userId}`
+          );
+          if (!userResponse.ok) {
+            throw new Error(`Failed to fetch user ${userId}`);
+          }
+          const user = await userResponse.json();
+          return [userId, user];
+        };
+        const usersData = await Promise.all(userIds.map(fetchUser));
+        setUsers(Object.fromEntries(usersData));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
-    fetchPosts();
-  }, [users, posts]);
+    fetchComments();
+
+  }, [posts]);
 
   useEffect(() => {
     const number = posts.filter((post) => post.postId === idCommentList).length;
     setCommentsOfNumber(number);
   }, [posts, idCommentList]);
 
-  // Filtre les commentaires pour n'afficher que ceux correspondant à l'id du post
   const filteredComments = posts.filter(
     (post) => post.postId === idCommentList
   );
 
-  // Pour ouvrir ou fermer les collapsibles des commentaires
   const handleCollapseToggle = () => {
     setIsCollapseOpen(!isCollapseOpen);
   };
@@ -87,8 +80,6 @@ function CommentsList({ idCommentList, countlike, countDislike }) {
           countlike={countlike}
           countDislike={countDislike}
         />
-
-        {/* Le nombre de commentaires */}
         <CommentsNumber number={commentsOfNumber} />
       </div>
 
@@ -112,7 +103,7 @@ function CommentsList({ idCommentList, countlike, countDislike }) {
                   lastname={users[post.userId]?.lastname}
                   publicationDate={post.publicationDate}
                   commentPost={post.comment}
-                  sameUser={id === post.userId ? "true" : ""}
+                  sameUser={id === post.userId}
                   idcomment={post._id}
                 />
               ))}
@@ -121,7 +112,6 @@ function CommentsList({ idCommentList, countlike, countDislike }) {
         </div>
       ) : null}
 
-      {/* Ajouter un commentaire */}
       <Comment idComment={idCommentList} />
     </div>
   );

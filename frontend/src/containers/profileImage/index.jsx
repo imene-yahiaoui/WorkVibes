@@ -1,4 +1,3 @@
-import "./style.css";
 import { login } from "../../helpers/features/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -8,22 +7,25 @@ function ProfileImage() {
   const dispatch = useDispatch();
   const infos = useSelector(login);
 
-  const id = infos?.payload.user?.user?.user._id | null;
-  const email = infos?.payload.user?.user?.user.email;
+  // Destructure user data from redux state
+  const { user } = infos.payload;
 
-  const password = infos?.payload.user?.user?.user.password;
-  const firstName = infos?.payload.user?.user?.user.firstname;
-  const lastName = infos?.payload.user?.user?.user.lastname;
-  const job = infos?.payload.user?.user?.user.job;
-  const bio = infos?.payload.user?.user?.user.bio;
-
-  const picture = infos?.payload.user?.user?.user.imageUrl;
-
+  // Destructure user properties
+  const {
+    _id: id,
+    email,
+    password,
+    firstname,
+    lastname,
+    job,
+    bio,
+    imageUrl: picture,
+  } = user;
+console.log("le id de ce user est :",id)
   const cover = "../images/user.png";
 
-  const [imageUrl, setImageUrl] = useState(
-    picture === undefined ? cover : picture
-  );
+  // Set initial imageUrl state based on picture availability
+  const [imageUrl, setImageUrl] = useState(picture || cover);
 
   const handleFile = async (e) => {
     e.preventDefault();
@@ -33,8 +35,8 @@ function ProfileImage() {
 
     const formData = new FormData();
     formData.append("imageUrl", file);
-    formData.append("firstname", firstName);
-    formData.append("lastname", lastName);
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
     formData.append("job", job);
     formData.append("bio", bio);
     formData.append("password", password);
@@ -66,7 +68,7 @@ function ProfileImage() {
             );
           }
         } catch (e) {
-          console.log(e, "error");
+          console.error(e, "error");
         }
       };
       fetchData();

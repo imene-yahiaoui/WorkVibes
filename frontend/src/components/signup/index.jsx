@@ -10,6 +10,7 @@ const Signup = () => {
   const [errorEmail, setErrorEmail] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const validateForm = (values) => {
     const errors = {};
 
@@ -39,64 +40,56 @@ const Signup = () => {
   };
 
   const handleSubmit = async (values) => {
-    let item = {
-      email: values.email,
-      password: values.password,
-      firstname: values.firstname,
-      lastname: values.lastname,
-    };
-    let loginItem = {
-      email: values.email,
-      password: values.password,
-    };
-
-    let response = await fetch("http://localhost:3000/api/auth/signup", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    });
-    console.log(response);
-    let result = await response.json();
-    console.log(result);
-    if (response.status === 201) {
-      //le login direct apres le signup
-      let response = await fetch("http://localhost:3000/api/auth/login", {
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginItem),
+        body: JSON.stringify(values),
       });
 
-      let result = await response.json();
+      if (response.ok) {
+        const loginResponse = await fetch(
+          "http://localhost:3000/api/auth/login",
+          {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password,
+            }),
+          }
+        );
 
-      if (response.status === 200) {
-        localStorage.setItem("token", result.token);
+        if (loginResponse.ok) {
+          const loginResult = await loginResponse.json();
+          localStorage.setItem("token", loginResult.token);
 
-        const id = result.userId;
-        let getinfos = await fetch(`http://localhost:3000/api/auth/${id}`);
-
-        let resultGetInfos = await getinfos.json();
-
-        if (response.status === 200) {
-          dispatch(
-            login({
-              user: resultGetInfos,
-            })
+          const id = loginResult.userId;
+          const userInfoResponse = await fetch(
+            `http://localhost:3000/api/auth/${id}`
           );
+          const userInfo = await userInfoResponse.json();
+
+          if (userInfoResponse.ok) {
+            dispatch(login({ user: userInfo }));
+          }
+          navigate("/");
+        } else if (response.status === 400) {
+          setErrorEmail(true);
+          function deleteError() {
+            setErrorEmail(false);
+          }
+          setTimeout(deleteError, 4000);
         }
-        navigate("/");
-      } else if (response.status === 400) {
-        setErrorEmail(true);
-        function deleteError() {
-          setErrorEmail(false);
-        }
-        setTimeout(deleteError, 4000);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
