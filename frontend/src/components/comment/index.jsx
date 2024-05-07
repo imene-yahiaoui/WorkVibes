@@ -51,7 +51,7 @@ function Comment({ idComment }) {
         )}
 
         <figcaption>
-          <input
+          <textarea
             type="text"
             className="post_inputText"
             value={comment}

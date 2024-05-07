@@ -6,6 +6,9 @@
   justify-content: space-between;
   padding: 0 50px;
 }
+.postEdit p {
+  text-align: left;
+}
 .postSave {
   display: flex;
   align-items: center;

@@ -102,7 +102,7 @@ function Account() {
             </div>
             <div className="account_info">
               <label htmlFor="bio">Bio </label>
-              <input
+              <textarea
                 id="bio"
                 type="text"
                 value={bio}

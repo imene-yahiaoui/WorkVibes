@@ -75,7 +75,7 @@ function Post() {
           )}
 
           <figcaption>
-            <input
+            <textarea
               type="text"
               className="post_inputText"
               value={description}
