@@ -42,7 +42,9 @@ function AllPosts() {
 
       const fetchUser = async (userId) => {
         try {
-          const userResponse = await fetch(`http://localhost:3000/api/auth/${userId}`);
+          const userResponse = await fetch(
+            `http://localhost:3000/api/auth/${userId}`
+          );
           if (!userResponse.ok) {
             throw new Error(`Failed to fetch user ${userId}`);
           }
@@ -75,6 +77,7 @@ function AllPosts() {
       {posts.map((post) => (
         <Posts
           key={post._id}
+          id={users[post.userId]?._id}
           imageUser={users[post.userId]?.imageUrl}
           firstname={users[post.userId]?.firstname}
           lastname={users[post.userId]?.lastname}
@@ -93,4 +96,4 @@ function AllPosts() {
   );
 }
 
-export default AllPosts
+export default AllPosts;

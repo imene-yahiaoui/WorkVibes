@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import OptionComment from "../optionComment";
-
+import { NavLink } from "react-router-dom";
 function CommentSection({
   imageUser,
   publicationDate,
@@ -11,6 +11,7 @@ function CommentSection({
   idcomment,
   idPost,
   commentPost,
+  id,
 }) {
   const cover = "../images/user.png";
   return (
@@ -23,11 +24,13 @@ function CommentSection({
             src={imageUser || cover}
           />
           <figcaption className="informationComment">
-            <div className="fullNameComment">
-              <b>
-                {firstname} {lastname}
-              </b>
-            </div>
+            <NavLink to={`/Profile/${id}`} key={id}>
+              <div className="fullNameComment">
+                <b>
+                  {firstname} {lastname}
+                </b>
+              </div>
+            </NavLink>
             <p>Posted on {publicationDate}</p>
           </figcaption>
         </figure>

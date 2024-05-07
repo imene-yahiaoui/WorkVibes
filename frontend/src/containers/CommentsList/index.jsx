@@ -100,6 +100,7 @@ function CommentsList({ idCommentList, countlike, countDislike,likeUser,dislikeU
               {filteredComments.map((post) => (
                 <CommentSection
                   key={post._id}
+                  id={users[post.userId]?._id}
                   imageUser={users[post.userId]?.imageUrl}
                   firstname={users[post.userId]?.firstname}
                   lastname={users[post.userId]?.lastname}

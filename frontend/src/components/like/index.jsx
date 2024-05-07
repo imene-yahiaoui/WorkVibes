@@ -3,6 +3,7 @@ import "./style.css";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { useState } from "react";
 import DisplayMessage from "../displayMessage";
+import { NavLink } from "react-router-dom";
 function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
   const [likList, setLikList] = useState(false);
   const [dislikList, setDislikList] = useState(false);
@@ -49,7 +50,7 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
     if (fetchAllUsers.ok) {
       const data = await fetchAllUsers.json();
       const matchedUsers = [];
-      for (let i = 0; i < likeUser.length; i++) {
+      for (let i = 0; i < likeUser?.length; i++) {
         data.forEach((user) => {
           if (user._id === likeUser[i]) {
             matchedUsers.push(user);
@@ -71,7 +72,7 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
     if (fetchAllUsers.ok) {
       const data = await fetchAllUsers.json();
       const matchedUsers = [];
-      for (let i = 0; i < dislikeUser.length; i++) {
+      for (let i = 0; i < dislikeUser?.length; i++) {
         data.forEach((user) => {
           if (user._id === dislikeUser[i]) {
             matchedUsers.push(user);
@@ -107,14 +108,13 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
       >
         {usersLikes.map((user) => {
           return (
-            <li key={user._id}>
+            <NavLink to={`/Profile/${user._id}`} key={user._id}>
               {user.imageUrl ? (
                 <img className="photoUser" alt="profile" src={user.imageUrl} />
               ) : (
                 <img className="photoUser" src={cover} alt="user" />
               )}
-              <p>{user.firstname}</p>
-            </li>
+            </NavLink>
           );
         })}
       </section>
@@ -126,14 +126,13 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
       >
         {usersDisLikes.map((user) => {
           return (
-            <li key={user._id}>
+            <NavLink to={`/Profile/${user._id}`} key={user._id}>
               {user.imageUrl ? (
                 <img className="photoUser" alt="profile" src={user.imageUrl} />
               ) : (
                 <img className="photoUser" src={cover} alt="user" />
               )}
-              <p>{user.firstname}</p>
-            </li>
+            </NavLink>
           );
         })}
       </section>

@@ -94,6 +94,7 @@ function Profile() {
         .map((post) => (
           <Posts
             key={post._id}
+            id={user?._id}
             imageUser={user?.imageUrl || ""}
             firstname={user?.firstname || ""}
             lastname={user?.lastname || ""}
@@ -104,6 +105,8 @@ function Profile() {
             idPost={post._id}
             countlike={post.likes.length}
             countDislike={post.dislikes.length}
+            likeUser={post.likes}
+            dislikeUser={post.dislikes}
           />
         ))}
     </div>

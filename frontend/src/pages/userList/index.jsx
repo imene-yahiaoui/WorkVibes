@@ -8,7 +8,6 @@ function UserList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
- 
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3000/api/auth/users", {
@@ -17,16 +16,13 @@ function UserList() {
         if (response.ok) {
           const data = await response.json();
 
-        
           // Filtrer les utilisateurs avec une imageUrl définie
-          const usersWithPhoto = data.filter(user => user.imageUrl);
+          const usersWithPhoto = data.filter((user) => user.imageUrl);
           setUsers(usersWithPhoto);
         }
-       
       } catch (error) {
         console.log(error);
       }
-   
     };
     fetchData();
   }, []);

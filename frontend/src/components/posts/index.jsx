@@ -1,7 +1,7 @@
 import "./style.css";
 import OptionPost from "../optionPost";
 import CommentsList from "../../containers/CommentsList";
-
+import { NavLink } from "react-router-dom";
 function Posts({
   imageUser,
   publicationDate,
@@ -16,7 +16,8 @@ function Posts({
   countlike,
   countDislike,
   likeUser,
-  dislikeUser
+  dislikeUser,
+ id
 }) {
   const cover = "../images/user.png";
   return (
@@ -30,10 +31,13 @@ function Posts({
           )}
 
           <figcaption>
+          <NavLink to={`/Profile/${id}`} key={id}>
             <b className="fullName">
               {firstname}
               {} {lastname}{" "}
             </b>
+            </NavLink>
+
             posted on {publicationDate}
           </figcaption>
         </figure>
