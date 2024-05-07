@@ -5,7 +5,7 @@ import "./style.css";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../helpers/features/userSlice";
-
+import DisplayMessage from "../../components/displayMessage";
 const Signup = () => {
   const [errorEmail, setErrorEmail] = useState(false);
   const navigate = useNavigate();
@@ -87,9 +87,16 @@ const Signup = () => {
           }
           setTimeout(deleteError, 4000);
         }
+      } else if (response.status === 400) {
+        DisplayMessage(
+          `This email ${values.email} is already in use.
+          Please use a different email address or proceed to login`,
+          "linear-gradient(to right, #ee8f8f, #ad0606)"
+        );
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error.message);
+      console.log("jesuuuuuuuuuuuuuuuis dans 400 catch");
     }
   };
 
