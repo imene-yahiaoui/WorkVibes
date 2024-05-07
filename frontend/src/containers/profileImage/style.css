@@ -19,6 +19,7 @@
   top: 31px;
   left: 27px;
   cursor: pointer;
+  background-color: #b65dcc;
 }
 .updatePicture {
   position: relative;

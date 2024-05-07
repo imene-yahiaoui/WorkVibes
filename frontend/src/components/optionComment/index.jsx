@@ -5,7 +5,7 @@ import { BsFillTrash3Fill, BsPencilFill } from "react-icons/bs";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./style.css";
-
+import DisplayMessage from "../displayMessage";
 function OptionComment({ commentPost, sameUser, idcomment }) {
   const [comment, setComment] = useState(commentPost);
   const [editMode, setEditMode] = useState(false);
@@ -28,7 +28,10 @@ function OptionComment({ commentPost, sameUser, idcomment }) {
     if (request.ok) {
       setShowDeleteModal(false);
     } else {
-      alert("Failed to delete pocomment.");
+      DisplayMessage(
+        "Deletion failed, please try again later",
+        "linear-gradient(to right, #ee8f8f, #ad0606)"
+      );
     }
   };
 
@@ -37,7 +40,10 @@ function OptionComment({ commentPost, sameUser, idcomment }) {
   const saveDescription = async (e) => {
     e.preventDefault();
     if (!comment.trim()) {
-      alert("Please enter a description.");
+      DisplayMessage(
+        "Please provide a description",
+        "linear-gradient(to right, #f7a8c5, #fdcedf)"
+      );
       return;
     }
 

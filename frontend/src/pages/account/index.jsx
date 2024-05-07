@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import ProfileImage from "../../containers/profileImage";
 import DeletUser from "../../containers/deletUser";
-
+import DisplayMessage from "../../components/displayMessage";
 function Account() {
   const dispatch = useDispatch();
   const infos = useSelector(login);
@@ -17,7 +17,7 @@ function Account() {
 
   async function updateUser(e) {
     e.preventDefault();
-    
+
     const formData = new FormData();
     formData.append("firstname", firstName);
     formData.append("lastname", lastName);
@@ -36,7 +36,10 @@ function Account() {
     });
 
     if (result.status === 200) {
-      alert("The changes have been successfully saved");
+      DisplayMessage(
+        "The changes have been saved successfully",
+        "linear-gradient(to right, #dfacec, #b65dcc)"
+      );
       fetchData();
     }
   }

@@ -5,7 +5,7 @@ import { BsFillTrash3Fill, BsPencilFill } from "react-icons/bs";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./style.css";
-
+import DisplayMessage from "../displayMessage";
 function OptionPost({ descriptionPost, sameUser, idPost }) {
   const [description, setDescription] = useState(descriptionPost);
   const [editMode, setEditMode] = useState(false);
@@ -23,9 +23,15 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
     });
 
     if (request.ok) {
-      alert("Post deleted successfully.");
+      DisplayMessage(
+        "Post deleted successfully",
+        "linear-gradient(to right, #dfacec, #b65dcc)"
+      );
     } else {
-      alert("Failed to delete post.");
+      DisplayMessage(
+        "Deletion failed, please try again later",
+        "linear-gradient(to right, #ee8f8f, #ad0606)"
+      );
     }
   };
   const toggleEditMode = () => {
@@ -34,7 +40,10 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
 
   const saveDescription = async () => {
     if (description.length === 0) {
-      alert("Please enter a description.");
+      DisplayMessage(
+        "Please provide a description",
+        "linear-gradient(to right, #f7a8c5, #fdcedf)"
+      );
       return;
     }
 
@@ -52,7 +61,10 @@ function OptionPost({ descriptionPost, sameUser, idPost }) {
     if (result.ok) {
       setEditMode(false);
     } else {
-      alert("Failed to save description.");
+      DisplayMessage(
+        "Failed to save description, please try again later",
+        "linear-gradient(to right, #ee8f8f, #ad0606)"
+      );
     }
   };
 

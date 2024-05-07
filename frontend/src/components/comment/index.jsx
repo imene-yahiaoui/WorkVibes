@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { LuSend } from "react-icons/lu";
 import { login } from "../../helpers/features/userSlice.js";
 import "./style.css";
-
+import DisplayMessage from "../displayMessage";
 function Comment({ idComment }) {
   const [comment, setComment] = useState("");
   const infos = useSelector(login);
@@ -14,7 +14,10 @@ function Comment({ idComment }) {
     e.preventDefault();
 
     if (comment.trim() === "") {
-      alert("Please enter a comment");
+      DisplayMessage(
+        "Please provide a comment",
+        "linear-gradient(to right, #f7a8c5, #fdcedf)"
+      );
       return;
     }
 
@@ -33,7 +36,6 @@ function Comment({ idComment }) {
 
     if (commentPost.status === 201) {
       setComment("");
-     
     }
   };
 

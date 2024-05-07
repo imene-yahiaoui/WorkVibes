@@ -4,7 +4,7 @@ import { login } from "../../helpers/features/userSlice.js";
 import { useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiFillPicture } from "react-icons/ai";
-
+import DisplayMessage from "../../components/displayMessage";
 function Post() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +28,10 @@ function Post() {
     const formData = new FormData();
 
     if (description.trim() === "") {
-      alert("Please enter a description for your post.");
+      DisplayMessage(
+        "Please provide a description for your post",
+        "linear-gradient(to right, #ee8f8f, #ad0606)"
+      );
       return;
     }
 
@@ -52,7 +55,10 @@ function Post() {
       deleteImg();
     } else {
       // Handle post creation failure
-      alert("Failed to create the post. Please try again later.");
+      DisplayMessage(
+        "Failed to create the post. Please try again later",
+        "linear-gradient(to right, #ee8f8f, #ad0606)"
+      );
     }
   };
 

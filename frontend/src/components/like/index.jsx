@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { useState } from "react";
+import DisplayMessage from "../displayMessage";
 function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
   const [likList, setLikList] = useState(false);
   const [dislikList, setDislikList] = useState(false);
@@ -25,9 +26,15 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
     );
 
     if (fetchAction.ok) {
-      alert("le like marche bien ");
+      DisplayMessage(
+        "Post liked successfully ",
+        "linear-gradient(to right, #dfacec, #b65dcc)"
+      );
     } else {
-      alert("vous aver deja liker ");
+      DisplayMessage(
+        "You have already liked this post",
+        "linear-gradient(to right, #dfacec, #b65dcc)"
+      );
     }
   };
   const likeUserList = async () => {
