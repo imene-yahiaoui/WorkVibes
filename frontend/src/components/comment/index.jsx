@@ -7,7 +7,7 @@ import DisplayMessage from "../displayMessage";
 function Comment({ idComment }) {
   const [comment, setComment] = useState("");
   const infos = useSelector(login);
-  const imageUser = infos?.payload.user?.user?.user?.imageUrl;
+  const imageUser = infos?.payload?.user?.user?.user?.imageUrl;
   const token = localStorage.getItem("token");
 
   const sendComment = async (e) => {

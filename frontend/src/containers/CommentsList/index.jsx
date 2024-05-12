@@ -27,37 +27,45 @@ function CommentsList({ idCommentList, countlike, countDislike,likeUser,dislikeU
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         if (!response.ok) {
           throw new Error("Failed to fetch comments");
         }
-
+  
         const data = await response.json();
         setPosts(data);
-
+  
         // Fetch user information for each comment
         const userIds = Array.from(new Set(data.map((post) => post.userId)));
+     
+  
         const fetchUser = async (userId) => {
-          const userResponse = await fetch(
-            `http://localhost:3000/api/auth/${userId}`
-          );
+          // Check if user ID should be ignored
+          if (userId === "663a91a4c762d5c02e86e0e7") {
+            return [userId, null]; // Return null for ignored user
+          }
+          
+          const userResponse = await fetch(`http://localhost:3000/api/auth/${userId}`);
           if (!userResponse.ok) {
             throw new Error(`Failed to fetch user ${userId}`);
           }
           const user = await userResponse.json();
           return [userId, user];
         };
+  
         const usersData = await Promise.all(userIds.map(fetchUser));
-        setUsers(Object.fromEntries(usersData));
+        // Filter out null values (ignored users) before setting state
+        const filteredUsersData = usersData.filter(([userId, user]) => user !== null);
+        setUsers(Object.fromEntries(filteredUsersData));
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchComments();
-
+  
   }, [posts]);
-
+  
   useEffect(() => {
     const number = posts.filter((post) => post.postId === idCommentList).length;
     setCommentsOfNumber(number);

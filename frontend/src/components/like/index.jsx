@@ -27,14 +27,11 @@ function Like({ userId, id, countlike, countDislike, likeUser, dislikeUser }) {
     );
 
     if (fetchAction.ok) {
-      DisplayMessage(
-        "Post liked successfully ",
-        "linear-gradient(to right, #dfacec, #b65dcc)"
-      );
+      console.log(`Post ${endpoint} successfully`);
     } else {
       DisplayMessage(
-        "You have already liked this post",
-        "linear-gradient(to right, #dfacec, #b65dcc)"
+        `You have already ${endpoint}   this post`,
+        `linear-gradient(to right, #dfacec, #b65dcc)`
       );
     }
   };
