@@ -58,11 +58,6 @@ node server.js
 
 **📦 Packages Used**
 
-json
-
-Copy code
-{
-
   "dependencies": {
   
     "bcrypt": "^5.0.1",
@@ -79,7 +74,17 @@ Copy code
     
     "react": "^17.0.2",
     
-    "redux": "^4.1.1"
-    
+    "redux": "^4.1.1" 
   }
-}
+
+
+
+![Capture d’écran 2024-05-12 203601](https://github.com/imene-yahiaoui/portfolio/assets/76797190/909c248a-1fdb-4206-8478-fe85e7feaef5)
+
+
+![image_2024-05-12_205606615](https://github.com/imene-yahiaoui/portfolio/assets/76797190/4c61f378-9f45-4651-b9ba-f8586b143ebf)
+
+
+
+
+![Capture d’écran 2024-05-12 203638](https://github.com/imene-yahiaoui/portfolio/assets/76797190/04dae53f-518b-4a96-a3a3-4fed9343f463)
