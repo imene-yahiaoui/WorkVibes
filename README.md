@@ -6,6 +6,8 @@ WorkVibes is a social network designed to foster collaboration and connection am
 
 🌟 **Technologies Used:**
 
+
+
 **Backend**
 
 ***Node.js:*** Our backend is developed with Node.js, providing a solid and scalable foundation to handle server operations.
